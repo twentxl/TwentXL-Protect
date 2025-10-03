@@ -1,0 +1,103 @@
+﻿using PasswordManager.Components;
+using PasswordManager.Pages;
+using System.Text;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Animation;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
+
+namespace PasswordManager
+{
+    public partial class MainWindow : Window
+    {
+        public static MainWindow Instance { get; private set; }
+
+        public MainWindow()
+        {
+            InitializeComponent();
+            Instance = this;
+            MainPageShow();
+        }
+
+        private void MainPageShow()
+        {
+            MainPage mainPage = new MainPage();
+            AddPage(mainPage);
+        }
+
+        private void AddPage(UIElement element)
+        {
+            MainControl.Children.Clear();
+            MainControl.Children.Add(element);
+        }
+
+        private void Titlebar_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ChangedButton == MouseButton.Left)
+                this.DragMove();
+        }
+
+        private void ButtonClose_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
+        private void ButtonMinimize_Click(object sender, RoutedEventArgs e)
+        {
+            this.WindowState = WindowState.Minimized;
+        }
+
+        private void ButtonMaximize_Click(object sender, RoutedEventArgs e)
+        {
+            if (this.WindowState == WindowState.Maximized)
+                this.WindowState = WindowState.Normal;
+            else
+                this.WindowState = WindowState.Maximized;
+        }
+
+        public async void ShowToast(string message, Color? color = null)
+        {
+            ToastMessage.Content = message;
+            if (color != null) ToastMessage.Foreground = new SolidColorBrush((Color)color);
+            ToastPanel.Visibility = Visibility.Visible;
+
+            DoubleAnimation fadeIn = new DoubleAnimation
+            {
+                From = 0,
+                To = 1,
+                Duration = TimeSpan.FromMilliseconds(300)
+            };
+            ToastPanel.BeginAnimation(UIElement.OpacityProperty, fadeIn);
+
+            await Task.Delay(2000);
+
+            DoubleAnimation fadeOut = new DoubleAnimation
+            {
+                From = 1,
+                To = 0,
+                Duration = TimeSpan.FromMilliseconds(300)
+            };
+            ToastPanel.BeginAnimation(UIElement.OpacityProperty, fadeOut);
+
+            await Task.Delay(300);
+            ToastPanel.Visibility = Visibility.Collapsed;
+        }
+
+        public void ShowModal(UIElement element)
+        {
+            ModalDialog modalDialog = new ModalDialog(element);
+            ModalDialog_Area.Children.Add(modalDialog);
+        }
+
+        public void HideModal()
+        {
+            ModalDialog_Area.Children.Clear();
+        }
+    }
+}
