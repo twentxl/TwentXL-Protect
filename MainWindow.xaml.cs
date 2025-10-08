@@ -1,16 +1,13 @@
 ﻿using PasswordManager.Components;
 using PasswordManager.Pages;
-using System.Text;
+using PasswordManager.Helper;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using System.Text.Json;
+using System.IO;
+using System.Diagnostics;
 
 namespace PasswordManager
 {
@@ -23,6 +20,12 @@ namespace PasswordManager
             InitializeComponent();
             Instance = this;
             MainPageShow();
+        }
+
+        protected override void OnClosed(EventArgs e)
+        {
+            DataSettings dataSettings = new DataSettings();
+            dataSettings.SaveJson();
         }
 
         private void MainPageShow()
