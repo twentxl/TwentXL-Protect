@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Text;
+using PasswordManager.Models;
 using System.Text.Json;
 using System.Windows;
 using System.Windows.Media;
@@ -16,13 +16,10 @@ namespace PasswordManager.Helper
     {
         private string filePath;
 
-        public byte[] key;
-        public byte[] iv;
-
         public DataSettings()
         {
             string localAppData = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
-            filePath = Path.Combine(localAppData, "TwentXL Protect", "passwordData.json");
+            filePath = Path.Combine(localAppData, "TwentXL Protect", "user_credentials.json");
         }
 
         public void LoadJson()

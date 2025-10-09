@@ -6,7 +6,7 @@
              xmlns:svgc="http://sharpvectors.codeplex.com/svgc/" 
              xmlns:local="clr-namespace:PasswordManager.Components"
              mc:Ignorable="d" d:DesignWidth="800" Height="150">
-    <Border Style="{StaticResource DataBlock_Block}">
+    <Border Style="{DynamicResource DataBlock_Block}">
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
@@ -14,18 +14,18 @@
             </Grid.ColumnDefinitions>
 
             <StackPanel Grid.Column="0" Orientation="Vertical" VerticalAlignment="Center">
-                <Label x:Name="Title_Content" Content="Undefined" Style="{StaticResource H1}" />
+                <Label x:Name="Title_Content" Content="Undefined" Style="{DynamicResource H1}" />
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
-                    <Label x:Name="Login_Block" Style="{StaticResource SecondColor_Label}">login:</Label>
-                    <TextBox x:Name="Login_Content" Text="Undefined" Style="{StaticResource DataBlock_Text}"/>
+                    <Label x:Name="Login_Block" Style="{DynamicResource SecondColor_Label}">login:</Label>
+                    <TextBox x:Name="Login_Content" Text="Undefined" Style="{DynamicResource DataBlock_Text}"/>
                 </StackPanel>
                 <StackPanel x:Name="Password_Block" Orientation="Horizontal" HorizontalAlignment="Left">
-                    <Label Style="{StaticResource SecondColor_Label}">password: </Label>
-                    <TextBox x:Name="Password_Content" Text="Undefined" Style="{StaticResource DataBlock_Text}" />
+                    <Label Style="{DynamicResource SecondColor_Label}">password: </Label>
+                    <TextBox x:Name="Password_Content" Text="Undefined" Style="{DynamicResource DataBlock_Text}" />
                 </StackPanel>
                 <StackPanel x:Name="Additional_Block" Orientation="Horizontal" HorizontalAlignment="Left">
-                    <Label Style="{StaticResource SecondColor_Label}">additional:</Label>
-                    <TextBox x:Name="Additional_Content" Text="Undefined" Style="{StaticResource DataBlock_Text}" />
+                    <Label Style="{DynamicResource SecondColor_Label}">additional:</Label>
+                    <TextBox x:Name="Additional_Content" Text="Undefined" Style="{DynamicResource DataBlock_Text}" />
                 </StackPanel>
             </StackPanel>
 

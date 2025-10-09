@@ -1,13 +1,14 @@
 ﻿using PasswordManager.Components;
-using PasswordManager.Pages;
 using PasswordManager.Helper;
+using PasswordManager.Pages;
+using System.Diagnostics;
+using System.IO;
+using System.Text.Json;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
-using System.Text.Json;
-using System.IO;
-using System.Diagnostics;
 
 namespace PasswordManager
 {
@@ -32,6 +33,12 @@ namespace PasswordManager
         {
             MainPage mainPage = new MainPage();
             AddPage(mainPage);
+        }
+
+        private void SettingsPageShow()
+        {
+            SettingsPage settingsPage = new SettingsPage();
+            AddPage(settingsPage);
         }
 
         private void AddPage(UIElement element)
@@ -62,6 +69,18 @@ namespace PasswordManager
                 this.WindowState = WindowState.Normal;
             else
                 this.WindowState = WindowState.Maximized;
+        }
+
+        private void Action_Click(object sender, RoutedEventArgs e)
+        {
+            Button button = sender as Button;
+            button.ContextMenu.PlacementTarget = button;
+            button.ContextMenu.IsOpen = true;
+        }
+
+        private void Settings_Click(object sender, RoutedEventArgs e)
+        {
+            SettingsPageShow();
         }
 
         public async void ShowToast(string message, Color? color = null)

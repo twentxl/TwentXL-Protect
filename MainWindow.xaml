@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PasswordManager"
         mc:Ignorable="d"
-        Background="#0A0B15"
+        Background="{DynamicResource WindowBackground}"
         WindowStyle="None"
         MinWidth="500"
         MinHeight="500"
@@ -23,7 +23,7 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <Grid Grid.Row="0" Background="#141625" MouseDown="Titlebar_MouseDown">
+        <Grid Grid.Row="0" Style="{DynamicResource TitleBar}" MouseDown="Titlebar_MouseDown">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="Auto" />
@@ -35,13 +35,13 @@
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Column="2">
-                <Button x:Name="ButtonMinimize" Width="40" Style="{StaticResource TitleBar_Button}" Click="ButtonMinimize_Click">
+                <Button x:Name="ButtonMinimize" Width="40" Style="{DynamicResource TitleBar_Button}" Click="ButtonMinimize_Click">
                     <Image Source="/Assets/Images/minimizeIcon.png"/>
                 </Button>
-                <Button x:Name="ButtonMaximize" Width="40" Style="{StaticResource TitleBar_Button}" Click="ButtonMaximize_Click">
+                <Button x:Name="ButtonMaximize" Width="40" Style="{DynamicResource TitleBar_Button}" Click="ButtonMaximize_Click">
                     <Image Source="/Assets/Images/maximizeIcon.png"/>
                 </Button>
-                <Button x:Name="ButtonClose" Width="40" Style="{StaticResource TitleBar_Button}" Click="ButtonClose_Click">
+                <Button x:Name="ButtonClose" Width="40" Style="{DynamicResource TitleBar_Button}" Click="ButtonClose_Click">
                     <Image Source="/Assets/Images/closeIcon.png"/>
                 </Button>
             </StackPanel>
@@ -54,10 +54,17 @@
             </Grid.RowDefinitions>
 
             <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Left" Margin="20,0,20,0">
-                <Button Style="{StaticResource Button_Link}" Margin="0,0,50,0">Backup</Button>
-                <Button Style="{StaticResource Button_Link}" Margin="0,0,50,0">Recovery</Button>
-                <Button Style="{StaticResource Button_Link}" Margin="0,0,50,0">Settings</Button>
-                <Button Style="{StaticResource Button_Link}" Margin="0,0,50,0">FAQ</Button>
+                <Button Style="{DynamicResource Button_Link}" Margin="0,0,50,0" Click="Action_Click">
+                    <Button.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem Header="Create backup" />
+                            <MenuItem Header="Load backup" />
+                        </ContextMenu>
+                    </Button.ContextMenu>
+                    Backup
+                </Button>
+                <Button Style="{DynamicResource Button_Link}" Margin="0,0,50,0" Click="Settings_Click">Settings</Button>
+                <!--<Button Style="{DynamicResource Button_Link}" Margin="0,0,50,0">FAQ</Button>-->
             </StackPanel>
             <Grid Grid.Row="1" MaxWidth="800" x:Name="MainControl" Margin="0,20,0,0" />
         </Grid>

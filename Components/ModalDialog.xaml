@@ -9,7 +9,7 @@
     <Grid>
         <Rectangle Fill="Black" Opacity="0.5"/>
 
-        <Border Padding="20" CornerRadius="20" Background="#141625" VerticalAlignment="Center" HorizontalAlignment="Center">
+        <Border Style="{DynamicResource ModalDialog}">
             <Grid x:Name="ModalContent" Width="400" />
         </Border>
     </Grid>

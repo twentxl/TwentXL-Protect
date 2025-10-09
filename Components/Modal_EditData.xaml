@@ -16,7 +16,7 @@
             <RowDefinition Height="40" />
         </Grid.RowDefinitions>
 
-        <Label Grid.Row="0" Style="{StaticResource H1}">Edit</Label>
+        <Label Grid.Row="0" Style="{DynamicResource H1}">Edit</Label>
         <StackPanel Grid.Row="1" Orientation="Vertical" VerticalAlignment="Center">
             <TextBox x:Name="Title" Tag="title" Height="40"/>
         </StackPanel>
@@ -25,7 +25,7 @@
         </StackPanel>
         <StackPanel Grid.Row="3" Orientation="Vertical" VerticalAlignment="Center">
             <TextBox x:Name="Password" Tag="password" Height="40"/>
-            <Button HorizontalAlignment="Right" Style="{StaticResource Button_Link}" Margin="0,0,20,0" Click="GeneratePassword_Click">Generate password</Button>
+            <Button HorizontalAlignment="Right" Style="{DynamicResource Button_Link}" Margin="0,0,20,0" Click="GeneratePassword_Click">Generate password</Button>
         </StackPanel>
         <StackPanel Grid.Row="4" Orientation="Vertical" VerticalAlignment="Center">
             <TextBox x:Name="Additional" Tag="additionality" Height="40"/>
@@ -36,8 +36,8 @@
                 <ColumnDefinition Width="100" />
             </Grid.ColumnDefinitions>
 
-            <Button Grid.Column="0" Style="{StaticResource Button}" Margin="0,0,20,0" Click="Confirm_Click">Confirm</Button>
-            <Button Grid.Column="1" Style="{StaticResource ButtonDanger}" Click="Cancel_Click">Cancel</Button>
+            <Button Grid.Column="0" Style="{DynamicResource Button}" Margin="0,0,20,0" Click="Confirm_Click">Confirm</Button>
+            <Button Grid.Column="1" Style="{DynamicResource ButtonDanger}" Click="Cancel_Click">Cancel</Button>
         </Grid>
     </Grid>
 </UserControl>
