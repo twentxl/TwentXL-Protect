@@ -81,6 +81,11 @@ namespace PasswordManager
             button.ContextMenu.IsOpen = true;
         }
 
+        private void Home_Click(object sender, RoutedEventArgs e)
+        {
+            MainPageShow();
+        }
+
         private void Settings_Click(object sender, RoutedEventArgs e)
         {
             SettingsPageShow();

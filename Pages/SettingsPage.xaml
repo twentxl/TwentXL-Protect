@@ -9,10 +9,12 @@
              d:Background="White">
     <ScrollViewer VerticalScrollBarVisibility="Auto">
         <StackPanel Orientation="Vertical" HorizontalAlignment="Left">
-            <Label Style="{DynamicResource H1}">Appearance</Label>
+            <StackPanel Orientation="Horizontal">
+                <Label Style="{DynamicResource H1}">Appearance</Label>
+            </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <Label>Dark theme:</Label>
-                <Button x:Name="DarkThemeButton" Style="{DynamicResource Button_Link}" Click="DarkTheme_Click" Content="123" />
+                <Button x:Name="DarkThemeButton" Style="{DynamicResource Button_Link}" Click="DarkTheme_Click" Content="On" />
             </StackPanel>
         </StackPanel>
     </ScrollViewer>

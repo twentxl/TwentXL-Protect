@@ -48,8 +48,7 @@ namespace PasswordManager.Pages
         {
             try
             {
-                string query = SearchBox.Text?.ToLower().Trim();
-                bool isSearched = false;
+                string query = SearchBox.Text?.Trim();
 
                 if(string.IsNullOrEmpty(query))
                 {
@@ -65,27 +64,17 @@ namespace PasswordManager.Pages
                         if (titleLabel?.Content?.ToString() != query)
                         {
                             dataBlock.Visibility = Visibility.Collapsed;
-                            isSearched = true;
                         }
                     }
                 }
 
-                if (isSearched)
-                {
-                    SearchButton.Visibility = Visibility.Collapsed;
-                    SearchCancelButton.Visibility = Visibility.Visible;
-                }
-                else
-                {
-                    SearchButton.Visibility = Visibility.Visible;
-                    SearchCancelButton.Visibility = Visibility.Collapsed;
-                    MainWindow.Instance?.ShowToast($"'{query}' is not found", Colors.Red);
-                }
+                SearchButton.Visibility = Visibility.Collapsed;
+                SearchCancelButton.Visibility = Visibility.Visible;
             }
             catch(Exception ex)
             {
                 Debug.WriteLine("Search error: " + ex.Message);
-                MessageBox.Show("Search Error. Try again", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MainWindow.Instance?.ShowToast("Search Error. Try again", Colors.Red);
             }
         }
 
