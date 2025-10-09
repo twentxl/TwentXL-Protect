@@ -1,5 +1,6 @@
 ﻿using PasswordManager.Components;
 using PasswordManager.Helper;
+using PasswordManager.Models;
 using PasswordManager.Pages;
 using System.Diagnostics;
 using System.IO;
@@ -15,6 +16,7 @@ namespace PasswordManager
     public partial class MainWindow : Window
     {
         public static MainWindow Instance { get; private set; }
+        private GlobalSettings globalSettings = new GlobalSettings();
 
         public MainWindow()
         {
@@ -27,6 +29,7 @@ namespace PasswordManager
         {
             DataSettings dataSettings = new DataSettings();
             dataSettings.SaveJson();
+            globalSettings.SaveSettings();
         }
 
         private void MainPageShow()

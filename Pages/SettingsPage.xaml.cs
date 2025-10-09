@@ -16,9 +16,7 @@ namespace PasswordManager.Pages
 {
     public partial class SettingsPage : UserControl
     {
-        GlobalSettings settings = new GlobalSettings();
-        SettingsModel settingsModel = new SettingsModel();
-
+        private SettingsModel settingsModel = GlobalSettings.settingsModel;
         public SettingsPage()
         {
             InitializeComponent();
@@ -27,22 +25,21 @@ namespace PasswordManager.Pages
 
         private void DarkTheme_Click(object sender, RoutedEventArgs e)
         {
+            if (settingsModel.DarkTheme)
+                settingsModel.DarkTheme = false;
+            else
+                settingsModel.DarkTheme = true;
+
             DarkThemeValidate();
-            settings.ApplyTheme(settingsModel.DarkTheme);
+            GlobalSettings.ApplyTheme(settingsModel.DarkTheme);
         }
 
         private void DarkThemeValidate()
         {
             if (settingsModel.DarkTheme)
-            {
-                settingsModel.DarkTheme = false;
-                DarkThemeButton.Content = "On";
-            }
-            else
-            {
-                settingsModel.DarkTheme = true;
                 DarkThemeButton.Content = "Off";
-            }
+            else
+                DarkThemeButton.Content = "On";
         }
     }
 }

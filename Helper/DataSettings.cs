@@ -30,10 +30,10 @@ namespace PasswordManager.Helper
                 Directory.CreateDirectory(directory);
 
                 if (!File.Exists(filePath))
-                    File.Create(filePath).Dispose();
+                    SaveJson();
 
                 string json = File.ReadAllText(filePath);
-                if (!string.IsNullOrEmpty(json))
+                if (json != null)
                 {
                     List<PasswordModel> passwordList = JsonSerializer.Deserialize<List<PasswordModel>>(json);
 
@@ -46,8 +46,8 @@ namespace PasswordManager.Helper
             }
             catch(Exception ex)
             {
-                Debug.WriteLine("JSON load error: " + ex.Message);
-                MessageBox.Show("JSON load error", "", MessageBoxButton.OK, MessageBoxImage.Error);
+                Debug.WriteLine("JSON credentials load error: " + ex.Message);
+                MessageBox.Show("JSON credentials load error", "", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
@@ -71,8 +71,8 @@ namespace PasswordManager.Helper
             }
             catch (Exception ex)
             {
-                Debug.WriteLine("JSON save error: " + ex.Message);
-                MessageBox.Show("JSON save error", "", MessageBoxButton.OK, MessageBoxImage.Error);
+                Debug.WriteLine("JSON credentials save error: " + ex.Message);
+                MessageBox.Show("JSON credentials save error", "", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
     }
