@@ -6,6 +6,7 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using PasswordManager.Components;
 using PasswordManager.Helper;
+using PasswordManager.Services;
 
 namespace PasswordManager.Pages
 {
@@ -25,7 +26,7 @@ namespace PasswordManager.Pages
         private void AddPassword_Click(object sender, RoutedEventArgs e)
         {
             Modal_AddData modal_addData = new Modal_AddData();
-            MainWindow.Instance?.ShowModal(modal_addData);
+            ModalService.ShowModal(modal_addData);
         }
 
         private void SearchCancelButton_Click(object sender, RoutedEventArgs e)
@@ -52,7 +53,7 @@ namespace PasswordManager.Pages
 
                 if(string.IsNullOrEmpty(query))
                 {
-                    MainWindow.Instance?.ShowToast("This field is empty", Colors.Yellow);
+                    ToastService.Show("This field is empty", Colors.Yellow);
                     return;
                 }
 
@@ -74,7 +75,7 @@ namespace PasswordManager.Pages
             catch(Exception ex)
             {
                 Debug.WriteLine("Search error: " + ex.Message);
-                MainWindow.Instance?.ShowToast("Search Error. Try again", Colors.Red);
+                ToastService.Show("Search Error. Try again", Colors.Red);
             }
         }
 

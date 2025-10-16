@@ -1,5 +1,6 @@
 ﻿using PasswordManager.Helper;
 using PasswordManager.Pages;
+using PasswordManager.Services;
 using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
@@ -28,7 +29,7 @@ namespace PasswordManager.Components
 
         private void Cancel_Click(object sender, RoutedEventArgs e)
         {
-            MainWindow.Instance?.HideModal();
+            ModalService.HideModal();
         }
 
         private void Confirm_Click(object sender, RoutedEventArgs e)
@@ -43,8 +44,8 @@ namespace PasswordManager.Components
 
                 FillAndCheckValue(title, login, password, additional);
 
-                MainWindow.Instance?.HideModal();
-                MainWindow.Instance?.ShowToast("Succcess!", Colors.Green);
+                ModalService.HideModal();
+                ToastService.Show("Block was edited", Colors.Green);
             }
             catch (Exception ex)
             {
@@ -79,7 +80,7 @@ namespace PasswordManager.Components
         {
             if (string.IsNullOrEmpty(textBox.Text))
             {
-                MainWindow.Instance?.ShowToast($"Field '{textBox.Name.ToLower()}' is required", Colors.Red);
+                ToastService.Show($"Field '{textBox.Name.ToLower()}' is required", Colors.Red);
                 textBox.BorderBrush = new SolidColorBrush(Colors.Red);
                 return false;
             }

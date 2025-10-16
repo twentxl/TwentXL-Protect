@@ -1,6 +1,8 @@
 ﻿using PasswordManager.Pages;
+using PasswordManager.Services;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace PasswordManager.Components
 {
@@ -31,12 +33,13 @@ namespace PasswordManager.Components
         private void EditBlock_Click(object sender, RoutedEventArgs e)
         {
             Modal_EditData modal_editData = new Modal_EditData(this, Title_Content.Content.ToString(), Login_Content.Text, Password_Content.Text, Additional_Content.Text);
-            MainWindow.Instance?.ShowModal(modal_editData);
+            ModalService.ShowModal(modal_editData);
         }
 
         private void DeleteBlock_Click(object sender, RoutedEventArgs e)
         {
             MainPage.MainPageInstance?.DataBlockStackPanel.Children.Remove(this);
+            ToastService.Show("Block was deleted", Colors.Green);
         }
     }
 }

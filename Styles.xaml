@@ -12,7 +12,17 @@
         <Setter Property="Foreground" Value="#1C1C1C" />
         <Setter Property="FontSize" Value="12" />
     </Style>
-    
+
+    <!--Toast-->
+    <Style x:Key="Toast" TargetType="Border">
+        <Setter Property="CornerRadius" Value="10" />
+        <Setter Property="Background" Value="#F4F4F4" />
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="VerticalAlignment" Value="Top" />
+        <Setter Property="Margin" Value="0,10,0,0" />
+        <Setter Property="Padding" Value="5" />
+    </Style>
+
     <!--TitleBar-->
     <Style x:Key="TitleBar" TargetType="Grid">
         <Setter Property="Background" Value="#EDEFFF" />

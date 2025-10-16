@@ -8,8 +8,7 @@ using System.Text.Json;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Animation;
+using PasswordManager.Services;
 
 namespace PasswordManager
 {
@@ -21,6 +20,7 @@ namespace PasswordManager
         public MainWindow()
         {
             InitializeComponent();
+            ToastService.Initialize(MyToast);
             Instance = this;
             MainPageShow();
         }
@@ -74,7 +74,7 @@ namespace PasswordManager
                 this.WindowState = WindowState.Maximized;
         }
 
-        private void Action_Click(object sender, RoutedEventArgs e)
+        private void BackupAction_Click(object sender, RoutedEventArgs e)
         {
             Button button = sender as Button;
             button.ContextMenu.PlacementTarget = button;
@@ -89,45 +89,6 @@ namespace PasswordManager
         private void Settings_Click(object sender, RoutedEventArgs e)
         {
             SettingsPageShow();
-        }
-
-        public async void ShowToast(string message, Color? color = null)
-        {
-            ToastMessage.Content = message;
-            if (color != null) ToastMessage.Foreground = new SolidColorBrush((Color)color);
-            ToastPanel.Visibility = Visibility.Visible;
-
-            DoubleAnimation fadeIn = new DoubleAnimation
-            {
-                From = 0,
-                To = 1,
-                Duration = TimeSpan.FromMilliseconds(300)
-            };
-            ToastPanel.BeginAnimation(UIElement.OpacityProperty, fadeIn);
-
-            await Task.Delay(2000);
-
-            DoubleAnimation fadeOut = new DoubleAnimation
-            {
-                From = 1,
-                To = 0,
-                Duration = TimeSpan.FromMilliseconds(300)
-            };
-            ToastPanel.BeginAnimation(UIElement.OpacityProperty, fadeOut);
-
-            await Task.Delay(300);
-            ToastPanel.Visibility = Visibility.Collapsed;
-        }
-
-        public void ShowModal(UIElement element)
-        {
-            ModalDialog modalDialog = new ModalDialog(element);
-            ModalDialog_Area.Children.Add(modalDialog);
-        }
-
-        public void HideModal()
-        {
-            ModalDialog_Area.Children.Clear();
         }
     }
 }

@@ -5,6 +5,7 @@ using System.Windows.Controls;
 using PasswordManager.Helper;
 using System.Windows.Media;
 using PasswordManager.Pages;
+using PasswordManager.Services;
 
 namespace PasswordManager.Components
 {
@@ -17,7 +18,7 @@ namespace PasswordManager.Components
 
         private void Cancel_Click(object sender, RoutedEventArgs e)
         {
-            MainWindow.Instance?.HideModal();
+            ModalService.HideModal();
         }
         private void GeneratePassword_Click(object sender, RoutedEventArgs e)
         {
@@ -33,8 +34,8 @@ namespace PasswordManager.Components
 
                 DataBlock dataBlock = new DataBlock(Title.Text, Login.Text, Password.Text, Additional.Text);
                 MainPage.MainPageInstance?.DataBlockStackPanel.Children.Add(dataBlock);
-                MainWindow.Instance?.HideModal();
-                MainWindow.Instance?.ShowToast("Succcess!", Colors.Green);
+                ModalService.HideModal();
+                ToastService.Show("Succcess", Colors.Green);
             }
             catch (Exception ex)
             {
@@ -47,7 +48,7 @@ namespace PasswordManager.Components
         {
             if (string.IsNullOrEmpty(textBox.Text))
             {
-                MainWindow.Instance?.ShowToast($"Field '{textBox.Name.ToLower()}' is required", Colors.Red);
+                ToastService.Show($"Field '{textBox.Name.ToLower()}' is required", Colors.Red);
                 textBox.BorderBrush = new SolidColorBrush(Colors.Red);
                 return false;
             }
