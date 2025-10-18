@@ -9,17 +9,20 @@ using PasswordManager.Models;
 using System.Text.Json;
 using System.Windows;
 using System.Windows.Media;
+using System.Security.Cryptography;
 
 namespace PasswordManager.Helper
 {
     public class DataSettings
     {
         private string filePath;
+        private string keysFile;
 
         public DataSettings()
         {
             string localAppData = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
-            filePath = Path.Combine(localAppData, "TwentXL Protect", "user_credentials.json");
+            filePath = Path.Combine(localAppData, "TwentXL Protect", "user_credentials.dat");
+            keysFile = Path.Combine(localAppData, "TwentXL Protect", "keys.json");
         }
 
         public void LoadJson()
@@ -32,10 +35,23 @@ namespace PasswordManager.Helper
                 if (!File.Exists(filePath))
                     SaveJson();
 
-                string json = File.ReadAllText(filePath);
-                if (json != null)
+                string file = File.ReadAllText(filePath);
+                if (file != null)
                 {
-                    List<PasswordModel> passwordList = JsonSerializer.Deserialize<List<PasswordModel>>(json);
+                    string keysJson = File.ReadAllText(keysFile);
+                    List<byte[]> keysList = JsonSerializer.Deserialize<List<byte[]>>(keysJson);
+                    Crypto.key = keysList[0];
+                    Crypto.iv = keysList[1];
+
+                    using (Aes aes = Aes.Create())
+                    {
+                        aes.Key = Crypto.key;
+                        aes.IV = Crypto.iv;
+
+                        file = Crypto.Decrypt(file, Crypto.key, Crypto.iv);
+                    }
+
+                    List<PasswordModel> passwordList = JsonSerializer.Deserialize<List<PasswordModel>>(file);
 
                     foreach (var item in passwordList)
                     {
@@ -67,13 +83,45 @@ namespace PasswordManager.Helper
                 }
 
                 string json = JsonSerializer.Serialize(passwordList);
-                File.WriteAllText(filePath, json);
+
+                using(Aes aes = Aes.Create())
+                {
+                    if((Crypto.key == null || Crypto.key.Length == 0) && (Crypto.iv == null || Crypto.iv.Length == 0))
+                    {
+                        aes.KeySize = 256;
+                        aes.GenerateKey();
+                        aes.GenerateIV();
+
+                        Crypto.key = aes.Key;
+                        Crypto.iv = aes.IV;
+                    }
+                    else
+                    {
+                        aes.Key = Crypto.key;
+                        aes.IV = Crypto.iv;
+                    }
+
+                    string file = Crypto.Encrypt(json, Crypto.key, Crypto.iv);
+                    File.WriteAllText(filePath, file);
+                }
+
+                SaveKeys();
             }
             catch (Exception ex)
             {
                 Debug.WriteLine("JSON credentials save error: " + ex.Message);
                 MessageBox.Show("JSON credentials save error", "", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+        }
+
+        private void SaveKeys()
+        {
+            List<byte[]> keysList = new List<byte[]>()
+            {
+                Crypto.key, Crypto.iv
+            };
+            string json = JsonSerializer.Serialize(keysList);
+            File.WriteAllText(keysFile, json);
         }
     }
 }

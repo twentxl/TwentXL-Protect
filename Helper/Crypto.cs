@@ -5,6 +5,9 @@ namespace PasswordManager.Helper
 {
     public class Crypto
     {
+        public static byte[] key;
+        public static byte[] iv;
+
         public static string Encrypt(string enText, byte[] Key, byte[] IV)
         {
             if (string.IsNullOrEmpty(enText)) throw new ArgumentNullException("enText");
