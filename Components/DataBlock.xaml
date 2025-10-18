@@ -15,15 +15,24 @@
 
             <StackPanel Grid.Column="0" Orientation="Vertical" VerticalAlignment="Center">
                 <Label x:Name="Title_Content" Content="Undefined" Style="{DynamicResource H1}" />
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
-                    <Label x:Name="Login_Block" Style="{DynamicResource SecondColor_Label}">login:</Label>
+                <StackPanel x:Name="Login_Block" Orientation="Horizontal" HorizontalAlignment="Left">
+                    <Button Style="{DynamicResource Button_Link}" Width="15" Click="CopyText_Click" ToolTip="Copy" Tag="1">
+                        <svgc:SvgViewbox Source="/Assets/Images/copyIcon.svg" />
+                    </Button>
+                    <Label Style="{DynamicResource SecondColor_Label}">login:</Label>
                     <TextBox x:Name="Login_Content" Text="Undefined" Style="{DynamicResource DataBlock_Text}"/>
                 </StackPanel>
                 <StackPanel x:Name="Password_Block" Orientation="Horizontal" HorizontalAlignment="Left">
+                    <Button Style="{DynamicResource Button_Link}" Width="15" Click="CopyText_Click" ToolTip="Copy" Tag="2">
+                        <svgc:SvgViewbox Source="/Assets/Images/copyIcon.svg" />
+                    </Button>
                     <Label Style="{DynamicResource SecondColor_Label}">password: </Label>
                     <TextBox x:Name="Password_Content" Text="Undefined" Style="{DynamicResource DataBlock_Text}" />
                 </StackPanel>
                 <StackPanel x:Name="Additional_Block" Orientation="Horizontal" HorizontalAlignment="Left">
+                    <Button Style="{DynamicResource Button_Link}" Width="15" Click="CopyText_Click" ToolTip="Copy" Tag="3">
+                        <svgc:SvgViewbox Source="/Assets/Images/copyIcon.svg" />
+                    </Button>
                     <Label Style="{DynamicResource SecondColor_Label}">additional:</Label>
                     <TextBox x:Name="Additional_Content" Text="Undefined" Style="{DynamicResource DataBlock_Text}" />
                 </StackPanel>

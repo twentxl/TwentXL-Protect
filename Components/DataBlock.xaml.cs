@@ -41,5 +41,29 @@ namespace PasswordManager.Components
             MainPage.MainPageInstance?.DataBlockStackPanel.Children.Remove(this);
             ToastService.Show("Block was deleted", Colors.Green);
         }
+
+        private void CopyText_Click(object sender, RoutedEventArgs e)
+        {
+            Button button = sender as Button;
+            byte number = Byte.Parse(button?.Tag.ToString());
+            switch(number)
+            {
+                case 1:
+                    Clipboard.SetText(Login_Content.Text);
+                    ToastService.Show("Copied", Colors.Green);
+                    break;
+                case 2:
+                    Clipboard.SetText(Password_Content.Text);
+                    ToastService.Show("Copied", Colors.Green);
+                    break;
+                case 3:
+                    Clipboard.SetText(Additional_Content.Text);
+                    ToastService.Show("Copied", Colors.Green);
+                    break;
+                default:
+                    ToastService.Show("Copy error", Colors.Red);
+                    break;
+            }
+        }
     }
 }
