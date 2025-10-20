@@ -42,6 +42,10 @@ namespace PasswordManager.Components
                 Debug.WriteLine("Add password error: " + ex.Message);
                 MessageBox.Show("Add password error", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+            finally
+            {
+                DataSettings.SaveJson();
+            }
         }
 
         private bool FieldValidation(TextBox textBox)

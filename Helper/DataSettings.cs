@@ -15,17 +15,11 @@ namespace PasswordManager.Helper
 {
     public class DataSettings
     {
-        private string filePath;
-        private string keysFile;
+        private static string localAppData = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+        private static string filePath = Path.Combine(localAppData, "TwentXL Protect", "user_credentials.dat");
+        private static string keysFile = Path.Combine(localAppData, "TwentXL Protect", "keys.json");
 
-        public DataSettings()
-        {
-            string localAppData = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
-            filePath = Path.Combine(localAppData, "TwentXL Protect", "user_credentials.dat");
-            keysFile = Path.Combine(localAppData, "TwentXL Protect", "keys.json");
-        }
-
-        public void LoadJson()
+        public static void LoadJson()
         {
             try
             {
@@ -38,11 +32,7 @@ namespace PasswordManager.Helper
                 string file = File.ReadAllText(filePath);
                 if (file != null)
                 {
-                    string keysJson = File.ReadAllText(keysFile);
-                    List<byte[]> keysList = JsonSerializer.Deserialize<List<byte[]>>(keysJson);
-                    Crypto.key = keysList[0];
-                    Crypto.iv = keysList[1];
-
+                    LoadKeys();
                     using (Aes aes = Aes.Create())
                     {
                         aes.Key = Crypto.key;
@@ -67,7 +57,7 @@ namespace PasswordManager.Helper
             }
         }
 
-        public void SaveJson()
+        public static void SaveJson()
         {
             try
             {
@@ -94,6 +84,8 @@ namespace PasswordManager.Helper
 
                         Crypto.key = aes.Key;
                         Crypto.iv = aes.IV;
+
+                        SaveKeys();
                     }
                     else
                     {
@@ -104,8 +96,6 @@ namespace PasswordManager.Helper
                     string file = Crypto.Encrypt(json, Crypto.key, Crypto.iv);
                     File.WriteAllText(filePath, file);
                 }
-
-                SaveKeys();
             }
             catch (Exception ex)
             {
@@ -114,7 +104,7 @@ namespace PasswordManager.Helper
             }
         }
 
-        private void SaveKeys()
+        private static void SaveKeys()
         {
             List<byte[]> keysList = new List<byte[]>()
             {
@@ -122,6 +112,14 @@ namespace PasswordManager.Helper
             };
             string json = JsonSerializer.Serialize(keysList);
             File.WriteAllText(keysFile, json);
+        }
+
+        private static void LoadKeys()
+        {
+            string keysJson = File.ReadAllText(keysFile);
+            List<byte[]> keysList = JsonSerializer.Deserialize<List<byte[]>>(keysJson);
+            Crypto.key = keysList[0];
+            Crypto.iv = keysList[1];
         }
     }
 }

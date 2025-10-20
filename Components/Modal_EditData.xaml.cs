@@ -52,6 +52,10 @@ namespace PasswordManager.Components
                 Debug.WriteLine("Edit Data error: " + ex.Message);
                 MessageBox.Show("Edit Data error", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+            finally
+            {
+                DataSettings.SaveJson();
+            }
         }
 
         private void FillAndCheckValue(string title, string login, string password, string additional)

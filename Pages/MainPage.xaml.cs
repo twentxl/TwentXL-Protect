@@ -18,9 +18,7 @@ namespace PasswordManager.Pages
         {
             InitializeComponent();
             MainPageInstance = this;
-
-            DataSettings dataSettings = new DataSettings();
-            dataSettings.LoadJson();
+            DataSettings.LoadJson();
         }
 
         private void AddPassword_Click(object sender, RoutedEventArgs e)

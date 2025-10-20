@@ -27,8 +27,7 @@ namespace PasswordManager
 
         protected override void OnClosed(EventArgs e)
         {
-            DataSettings dataSettings = new DataSettings();
-            dataSettings.SaveJson();
+            DataSettings.SaveJson();
             globalSettings.SaveSettings();
         }
 
