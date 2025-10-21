@@ -60,7 +60,7 @@
                 <Button Style="{DynamicResource Button_Link}" Margin="0,0,50,0" Click="BackupAction_Click">
                     <Button.ContextMenu>
                         <ContextMenu>
-                            <MenuItem Header="Create backup" />
+                            <MenuItem Header="Create backup" Click="CreateBackup_Click"/>
                             <MenuItem Header="Load backup" />
                         </ContextMenu>
                     </Button.ContextMenu>

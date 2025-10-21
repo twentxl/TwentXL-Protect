@@ -20,7 +20,14 @@ namespace PasswordManager.Pages
         public SettingsPage()
         {
             InitializeComponent();
-            DarkThemeValidate();
+            UpdateSettings();
+        }
+
+        private void BackupPathEdit_Click(object sender, RoutedEventArgs e)
+        {
+            string path = Utils.GetPathDir();
+            settingsModel.BackupPath = path;
+            UpdateSettings();
         }
 
         private void DarkTheme_Click(object sender, RoutedEventArgs e)
@@ -30,16 +37,18 @@ namespace PasswordManager.Pages
             else
                 settingsModel.DarkTheme = true;
 
-            DarkThemeValidate();
+            UpdateSettings();
             GlobalSettings.ApplyTheme(settingsModel.DarkTheme);
         }
 
-        private void DarkThemeValidate()
+        private void UpdateSettings()
         {
             if (settingsModel.DarkTheme)
                 DarkThemeButton.Content = "Off";
             else
                 DarkThemeButton.Content = "On";
+
+            BackupPath.Content = settingsModel.BackupPath;
         }
     }
 }

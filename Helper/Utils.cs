@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace PasswordManager.Helper
 {
@@ -19,6 +19,21 @@ namespace PasswordManager.Helper
                 res.Append(valid[rand.Next(valid.Length)]);
 
             return res.ToString();
+        }
+
+        public static string GetPathDir()
+        {
+            using (var dialog = new FolderBrowserDialog())
+            {
+                dialog.Description = "Select Folder";
+                dialog.ShowNewFolderButton = true;
+
+                if (dialog.ShowDialog() == DialogResult.OK)
+                {
+                    return dialog.SelectedPath;
+                }
+            }
+            return null;
         }
     }
 }

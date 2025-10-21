@@ -15,20 +15,20 @@ namespace PasswordManager
     public partial class MainWindow : Window
     {
         public static MainWindow Instance { get; private set; }
-        private GlobalSettings globalSettings = new GlobalSettings();
 
         public MainWindow()
         {
             InitializeComponent();
             ToastService.Initialize(MyToast);
             Instance = this;
+            GlobalSettings.LoadSettings();
             MainPageShow();
         }
 
         protected override void OnClosed(EventArgs e)
         {
             DataSettings.SaveJson();
-            globalSettings.SaveSettings();
+            GlobalSettings.SaveSettings();
         }
 
         private void MainPageShow()
@@ -88,6 +88,11 @@ namespace PasswordManager
         private void Settings_Click(object sender, RoutedEventArgs e)
         {
             SettingsPageShow();
+        }
+
+        private void CreateBackup_Click(object sender, RoutedEventArgs e)
+        {
+            GlobalSettings.CreateBackup();
         }
     }
 }

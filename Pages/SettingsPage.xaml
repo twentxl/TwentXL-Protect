@@ -10,6 +10,15 @@
     <ScrollViewer VerticalScrollBarVisibility="Auto">
         <StackPanel Orientation="Vertical" HorizontalAlignment="Left">
             <StackPanel Orientation="Horizontal">
+                <Label Style="{DynamicResource H1}">General</Label>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label>Backup path:</Label>
+                <Label x:Name="BackupPath" Content="undefined" />
+                <Button Style="{DynamicResource Button_Link}" Content="Edit" Click="BackupPathEdit_Click" />
+            </StackPanel>
+            
+            <StackPanel Orientation="Horizontal">
                 <Label Style="{DynamicResource H1}">Appearance</Label>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
