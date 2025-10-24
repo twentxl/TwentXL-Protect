@@ -43,6 +43,12 @@ namespace PasswordManager
             AddPage(settingsPage);
         }
 
+        private void FAQPageShow()
+        {
+            FAQPage faqpage = new FAQPage();
+            AddPage(faqpage);
+        }
+
         private void AddPage(UIElement element)
         {
             MainControl.Children.Clear();
@@ -88,6 +94,11 @@ namespace PasswordManager
         private void Settings_Click(object sender, RoutedEventArgs e)
         {
             SettingsPageShow();
+        }
+
+        private void FAQ_Click(object sender, RoutedEventArgs e)
+        {
+            FAQPageShow();
         }
 
         private void CreateBackup_Click(object sender, RoutedEventArgs e)
