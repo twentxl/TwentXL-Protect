@@ -61,7 +61,7 @@
                     <Button.ContextMenu>
                         <ContextMenu>
                             <MenuItem Header="Create backup" Click="CreateBackup_Click"/>
-                            <MenuItem Header="Load backup" />
+                            <MenuItem Header="Load backup" Click="LoadBackup_Click" />
                         </ContextMenu>
                     </Button.ContextMenu>
                     Backup

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PasswordManager.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -34,6 +35,19 @@ namespace PasswordManager.Helper
                 }
             }
             return null;
+        }
+
+        public static string SelectFile()
+        {
+            Microsoft.Win32.OpenFileDialog dialog = new Microsoft.Win32.OpenFileDialog
+            {
+                Filter = "DAT files (*.dat)|*.dat|All files (*.*)|*.*",
+                DefaultExt = ".dat",
+            };
+
+            bool? result = dialog.ShowDialog();
+            if (result == true) return dialog.FileName;
+            else return null;
         }
     }
 }

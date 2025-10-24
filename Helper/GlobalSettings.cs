@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
+using System.Security.Cryptography;
 using System.Text.Json;
 using System.Windows;
 using System.Windows.Media;
@@ -90,13 +90,44 @@ namespace PasswordManager.Helper
 
                 string json = JsonSerializer.Serialize(passwordList);
 
-                File.WriteAllText(Path.Combine(settingsModel.BackupPath, "credentialds_backup.json"), json);
+                File.WriteAllText(Path.Combine(settingsModel.BackupPath, "credentialds_backup.dat"), json);
                 ToastService.Show($"Backup created '{settingsModel.BackupPath}'");
             }
             catch (Exception ex)
             {
                 Debug.WriteLine("Credentials backup error: " + ex.Message);
                 ToastService.Show("Credentials backup error", Colors.Red);
+            }
+        }
+
+        public static void LoadBackup()
+        {
+            try
+            {
+                string filename = Utils.SelectFile();
+                if (filename != null)
+                {
+                    string file = File.ReadAllText(filename);
+                    if (file != null)
+                    {
+                        using(Aes aes = Aes.Create())
+                        {
+                            aes.Key = Crypto.key;
+                            aes.IV = Crypto.iv;
+
+                            file = Crypto.Encrypt(file, Crypto.key, Crypto.iv);
+                            File.WriteAllText(DataSettings.filePath, file);
+                        }
+                        DataSettings.LoadJson();
+                        ToastService.Show("Backup was loaded!", Colors.Green);
+                    }
+                }
+                else ToastService.Show("File is not selected", Colors.Red);
+            }
+            catch(Exception ex)
+            {
+                Debug.WriteLine("Load backup error: " + ex.Message);
+                ToastService.Show("Load backup error", Colors.Red);
             }
         }
     }

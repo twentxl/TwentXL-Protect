@@ -16,13 +16,14 @@ namespace PasswordManager.Helper
     public class DataSettings
     {
         private static string localAppData = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
-        private static string filePath = Path.Combine(localAppData, "TwentXL Protect", "user_credentials.dat");
+        public static string filePath = Path.Combine(localAppData, "TwentXL Protect", "user_credentials.dat");
         private static string keysFile = Path.Combine(localAppData, "TwentXL Protect", "keys.json");
 
         public static void LoadJson()
         {
             try
             {
+                MainPage.MainPageInstance?.DataBlockStackPanel.Children.Clear();
                 string directory = Path.GetDirectoryName(filePath)!;
                 Directory.CreateDirectory(directory);
 

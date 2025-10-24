@@ -94,5 +94,10 @@ namespace PasswordManager
         {
             GlobalSettings.CreateBackup();
         }
+
+        private void LoadBackup_Click(object sender, RoutedEventArgs e)
+        {
+            GlobalSettings.LoadBackup();
+        }
     }
 }
