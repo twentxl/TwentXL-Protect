@@ -57,7 +57,7 @@
             <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Left" Margin="20,0,20,0">
                 <Button Style="{DynamicResource Button_Link}" Margin="0,0,50,0" Click="Home_Click">Home</Button>
                 <Button Style="{DynamicResource Button_Link}" Margin="0,0,50,0" Click="Settings_Click">Settings</Button>
-                <Button Style="{DynamicResource Button_Link}" Margin="0,0,50,0" Click="FAQ_Click">FAQ</Button>
+                <!--<Button Style="{DynamicResource Button_Link}" Margin="0,0,50,0" Click="FAQ_Click">FAQ</Button>-->
                 <Button Style="{DynamicResource Button_Link}" Margin="0,0,50,0" Click="BackupAction_Click">
                     <Button.ContextMenu>
                         <ContextMenu>
