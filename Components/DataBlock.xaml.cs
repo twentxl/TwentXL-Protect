@@ -39,7 +39,7 @@ namespace PasswordManager.Components
         private void DeleteBlock_Click(object sender, RoutedEventArgs e)
         {
             MainPage.MainPageInstance?.DataBlockStackPanel.Children.Remove(this);
-            ToastService.Show("Block was deleted", Colors.Green);
+            ToastService.Show("Block was deleted", Colors.Yellow);
         }
 
         private void CopyText_Click(object sender, RoutedEventArgs e)
