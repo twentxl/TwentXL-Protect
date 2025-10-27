@@ -51,7 +51,7 @@ namespace PasswordManager.Pages
 
                 if(string.IsNullOrEmpty(query))
                 {
-                    ToastService.Show("This field is empty", Colors.Yellow);
+                    ToastService.Show("This field is empty", Colors.Orange);
                     return;
                 }
 

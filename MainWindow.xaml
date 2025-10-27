@@ -12,66 +12,69 @@
         MinHeight="500"
         WindowStartupLocation="CenterScreen"
         Icon="/Assets/Images/logo_light.png"
-        Title="TwentXL Protect" Height="600" Width="950">
+        Title="TwentXL Protect" Height="650" Width="950">
     <WindowChrome.WindowChrome>
         <WindowChrome GlassFrameThickness="0"
                       CornerRadius="0"
                       CaptionHeight="0"/>
     </WindowChrome.WindowChrome>
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="30" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
+    <Border Background="{DynamicResource WindowBackground}" CornerRadius="0" BorderBrush="#979AAD" BorderThickness="1">
 
-        <Grid Grid.Row="0" Style="{DynamicResource TitleBar}" MouseDown="Titlebar_MouseDown">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="Auto" />
-            </Grid.ColumnDefinitions>
-
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0,0,0">
-                <Image Style="{DynamicResource Logo}"/>
-                <Label FontSize="12" Grid.Column="0">TwentXL Protect</Label>
-            </StackPanel>
-
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Column="2">
-                <Button x:Name="ButtonMinimize" Width="40" Style="{DynamicResource TitleBar_Button}" Click="ButtonMinimize_Click">
-                    <Image Source="/Assets/Images/minimizeIcon.png"/>
-                </Button>
-                <Button x:Name="ButtonMaximize" Width="40" Style="{DynamicResource TitleBar_Button}" Click="ButtonMaximize_Click">
-                    <Image Source="/Assets/Images/maximizeIcon.png"/>
-                </Button>
-                <Button x:Name="ButtonClose" Width="40" Style="{DynamicResource TitleBar_Button}" Click="ButtonClose_Click">
-                    <Image Source="/Assets/Images/closeIcon.png"/>
-                </Button>
-            </StackPanel>
-        </Grid>
-
-        <Grid Grid.Row="1">
+        <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="30" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
 
-            <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Left" Margin="20,0,20,0">
-                <Button Style="{DynamicResource Button_Link}" Margin="0,0,50,0" Click="Home_Click">Home</Button>
-                <Button Style="{DynamicResource Button_Link}" Margin="0,0,50,0" Click="Settings_Click">Settings</Button>
-                <Button Style="{DynamicResource Button_Link}" Margin="0,0,50,0" Click="FAQ_Click">FAQ</Button>
-                <Button Style="{DynamicResource Button_Link}" Margin="0,0,50,0" Click="BackupAction_Click">
-                    <Button.ContextMenu>
-                        <ContextMenu>
-                            <MenuItem Header="Create backup" Click="CreateBackup_Click"/>
-                            <MenuItem Header="Load backup" Click="LoadBackup_Click" />
-                        </ContextMenu>
-                    </Button.ContextMenu>
-                    Backup
-                </Button>
-            </StackPanel>
-            <Grid Grid.Row="1" MaxWidth="800" x:Name="MainControl" Margin="0,20,0,0" />
-        </Grid>
+            <Grid Grid.Row="0" Style="{DynamicResource TitleBar}" MouseDown="Titlebar_MouseDown">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
 
-        <comp:Toast x:Name="MyToast" Grid.Row="1" Panel.ZIndex="99" />
-        <Grid Grid.Row="1" x:Name="ModalDialog_Area" />
-    </Grid>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0,0,0">
+                    <Image Style="{DynamicResource Logo}"/>
+                    <Label FontSize="12" Grid.Column="0">TwentXL Protect</Label>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Column="2">
+                    <Button x:Name="ButtonMinimize" Width="40" Style="{DynamicResource TitleBar_Button}" Click="ButtonMinimize_Click">
+                        <Image Source="/Assets/Images/minimizeIcon.png"/>
+                    </Button>
+                    <Button x:Name="ButtonMaximize" Width="40" Style="{DynamicResource TitleBar_Button}" Click="ButtonMaximize_Click">
+                        <Image Source="/Assets/Images/maximizeIcon.png"/>
+                    </Button>
+                    <Button x:Name="ButtonClose" Width="40" Style="{DynamicResource TitleBar_Button}" Click="ButtonClose_Click">
+                        <Image Source="/Assets/Images/closeIcon.png"/>
+                    </Button>
+                </StackPanel>
+            </Grid>
+
+            <Grid Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Left" Margin="20,0,20,0">
+                    <Button Style="{DynamicResource Button_Link}" Margin="0,0,50,0" Click="Home_Click">Home</Button>
+                    <Button Style="{DynamicResource Button_Link}" Margin="0,0,50,0" Click="Settings_Click">Settings</Button>
+                    <Button Style="{DynamicResource Button_Link}" Margin="0,0,50,0" Click="FAQ_Click">FAQ</Button>
+                    <Button Style="{DynamicResource Button_Link}" Margin="0,0,50,0" Click="BackupAction_Click">
+                        <Button.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Header="Create backup" Click="CreateBackup_Click"/>
+                                <MenuItem Header="Load backup" Click="LoadBackup_Click" />
+                            </ContextMenu>
+                        </Button.ContextMenu>
+                        Backup
+                    </Button>
+                </StackPanel>
+                <Grid Grid.Row="1" MaxWidth="800" x:Name="MainControl" Margin="0,20,0,0" />
+            </Grid>
+
+            <comp:Toast x:Name="MyToast" Grid.Row="1" Panel.ZIndex="99" />
+            <Grid Grid.Row="1" x:Name="ModalDialog_Area" />
+        </Grid>
+    </Border>
 </Window>

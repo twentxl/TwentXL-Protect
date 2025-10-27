@@ -1,4 +1,5 @@
-﻿using PasswordManager.Pages;
+﻿using PasswordManager.Helper;
+using PasswordManager.Pages;
 using PasswordManager.Services;
 using System.Windows;
 using System.Windows.Controls;
@@ -39,7 +40,8 @@ namespace PasswordManager.Components
         private void DeleteBlock_Click(object sender, RoutedEventArgs e)
         {
             MainPage.MainPageInstance?.DataBlockStackPanel.Children.Remove(this);
-            ToastService.Show("Block was deleted", Colors.Yellow);
+            ToastService.Show("Block was deleted", Colors.Orange);
+            DataSettings.SaveJson();
         }
 
         private void CopyText_Click(object sender, RoutedEventArgs e)
