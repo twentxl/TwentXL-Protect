@@ -3,7 +3,7 @@
     <SolidColorBrush x:Key="WindowBackground" Color="#0A0B15"/>
     
     <Style x:Key="Logo" TargetType="Image">
-        <Setter Property="Source" Value="/Assets/Images/logo_light.png" />
+        <Setter Property="Source" Value="/Assets/Images/logo_protect_light.png" />
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="Width" Value="15" />
     </Style>

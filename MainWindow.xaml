@@ -11,7 +11,7 @@
         MinWidth="500"
         MinHeight="500"
         WindowStartupLocation="CenterScreen"
-        Icon="/Assets/Images/logo_light.png"
+        Icon="/Assets/Images/logo_protect_light.png"
         Title="TwentXL Protect" Height="650" Width="950">
     <WindowChrome.WindowChrome>
         <WindowChrome GlassFrameThickness="0"
@@ -32,9 +32,10 @@
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
 
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0,0,0">
+                <StackPanel Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0,0,0">
                     <Image Style="{DynamicResource Logo}"/>
-                    <Label FontSize="12" Grid.Column="0">TwentXL Protect</Label>
+                    <Image Source="/Assets/Images/logo.png" Width="50" VerticalAlignment="Center"/>
+                    <Label FontSize="12">Protect</Label>
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Column="2">
