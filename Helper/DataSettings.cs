@@ -115,12 +115,21 @@ namespace PasswordManager.Helper
             File.WriteAllText(keysFile, json);
         }
 
-        private static void LoadKeys()
+        public static void LoadKeys()
         {
-            string keysJson = File.ReadAllText(keysFile);
-            List<byte[]> keysList = JsonSerializer.Deserialize<List<byte[]>>(keysJson);
-            Crypto.key = keysList[0];
-            Crypto.iv = keysList[1];
+            try 
+            { 
+                string keysJson = File.ReadAllText(keysFile);
+                List<byte[]> keysList = JsonSerializer.Deserialize<List<byte[]>>(keysJson);
+                Crypto.key = keysList[0];
+                Crypto.iv = keysList[1];
+            }
+            catch
+            {
+                MessageBox.Show("Launch error: The keys were not found", "", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            
         }
     }
 }

@@ -21,7 +21,6 @@ namespace PasswordManager
             InitializeComponent();
             ToastService.Initialize(MyToast);
             Instance = this;
-            GlobalSettings.LoadSettings();
             MainPageShow();
         }
 

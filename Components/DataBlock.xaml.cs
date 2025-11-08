@@ -39,9 +39,8 @@ namespace PasswordManager.Components
 
         private void DeleteBlock_Click(object sender, RoutedEventArgs e)
         {
-            MainPage.MainPageInstance?.DataBlockStackPanel.Children.Remove(this);
-            ToastService.Show("Block was deleted", Colors.Orange);
-            DataSettings.SaveJson();
+            DeleteDialog deleteDialog = new DeleteDialog(this);
+            ModalService.ShowModal(deleteDialog);
         }
 
         private void CopyText_Click(object sender, RoutedEventArgs e)

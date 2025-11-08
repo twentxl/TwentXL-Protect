@@ -1,4 +1,6 @@
-﻿using System.Configuration;
+﻿using PasswordManager.Helper;
+using PasswordManager.Models;
+using System.Configuration;
 using System.Data;
 using System.Windows;
 
@@ -14,6 +16,12 @@ namespace PasswordManager
                 var uri = new Uri("pack://application:,,,/Styles.xaml");
                 var resourceDictionary = new ResourceDictionary { Source = uri };
                 Application.Current.Resources.MergedDictionaries.Add(resourceDictionary);
+                GlobalSettings.LoadSettings();
+
+                Window window;
+                if (GlobalSettings.isAuth) window = new AuthenticationWindow();
+                else window = new MainWindow();
+                window.Show();
             }
             catch(Exception ex)
             {

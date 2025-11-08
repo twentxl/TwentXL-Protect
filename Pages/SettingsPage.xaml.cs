@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,17 +9,21 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
+using System.IO;
+using PasswordManager.Components;
 using PasswordManager.Helper;
 using PasswordManager.Models;
+using PasswordManager.Services;
 
 namespace PasswordManager.Pages
 {
     public partial class SettingsPage : UserControl
     {
         private SettingsModel settingsModel = GlobalSettings.settingsModel;
+        public static SettingsPage SettingsPageInstance { get; private set; }
         public SettingsPage()
         {
+            SettingsPageInstance = this;
             InitializeComponent();
             UpdateSettings();
         }
@@ -41,7 +46,20 @@ namespace PasswordManager.Pages
             GlobalSettings.ApplyTheme(settingsModel.DarkTheme);
         }
 
-        private void UpdateSettings()
+        private void AddAuthCode_Click(object sender, RoutedEventArgs e)
+        {
+            Modal_AddAuthCode modalAddAuthCode = new Modal_AddAuthCode();
+            ModalService.ShowModal(modalAddAuthCode);
+        }
+
+        private void RemoveAuthCode_Click(object sender, RoutedEventArgs e)
+        {
+            File.Delete(GlobalSettings.filePathAuth);
+            GlobalSettings.LoadSettings();
+            UpdateSettings();
+        }
+
+        public void UpdateSettings()
         {
             if (settingsModel.DarkTheme)
                 DarkThemeButton.Content = "Off";
@@ -49,6 +67,20 @@ namespace PasswordManager.Pages
                 DarkThemeButton.Content = "On";
 
             BackupPath.Content = settingsModel.BackupPath;
+
+            if(GlobalSettings.isAuth)
+            {
+                AddCodeButton.Visibility = Visibility.Collapsed;
+                RemoveCodeButton.Visibility = AuthenticationCode.Visibility = Visibility.Visible;
+
+                string code = File.ReadAllText(GlobalSettings.filePathAuth);
+                AuthenticationCode.Content = code;
+            }
+            else
+            {
+                AddCodeButton.Visibility = Visibility.Visible;
+                RemoveCodeButton.Visibility = AuthenticationCode.Visibility = Visibility.Collapsed;
+            }
         }
     }
 }

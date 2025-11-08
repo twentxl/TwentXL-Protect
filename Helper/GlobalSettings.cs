@@ -18,19 +18,25 @@ namespace PasswordManager.Helper
     {
         private const string LightThemePath = "pack://application:,,,/Styles.xaml";
         private const string DarkThemePath = "pack://application:,,,/Styles_Dark.xaml";
-        private static string filePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "TwentXL Protect", "settings.json");
+        private static string filePathSettings = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "TwentXL Protect", "settings.json");
+        public static string filePathAuth = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "TwentXL Protect", "authcode.dat");
 
         public static SettingsModel settingsModel = new SettingsModel();
+        public static bool isAuth = false;
 
         public static void LoadSettings()
         {
-            string directory = Path.GetDirectoryName(filePath)!;
-            Directory.CreateDirectory(directory);
+            string directorySettings = Path.GetDirectoryName(filePathSettings)!;
+            Directory.CreateDirectory(directorySettings);
 
-            if (!File.Exists(filePath))
+            if (!File.Exists(filePathSettings))
                 SaveSettings();
 
-            string json = File.ReadAllText(filePath);
+            if (File.Exists(filePathAuth))
+                isAuth = true;
+            else isAuth = false;
+
+                string json = File.ReadAllText(filePathSettings);
             if(json != null)
             {
                 SettingsModel settingsList = JsonSerializer.Deserialize<SettingsModel>(json);
@@ -46,7 +52,7 @@ namespace PasswordManager.Helper
             try
             {
                 string json = JsonSerializer.Serialize(settingsModel);
-                File.WriteAllText(filePath, json);
+                File.WriteAllText(filePathSettings, json);
             }
             catch(Exception ex)
             {

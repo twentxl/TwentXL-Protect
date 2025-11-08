@@ -17,6 +17,12 @@
                 <Label x:Name="BackupPath" Content="undefined" />
                 <Button Style="{DynamicResource Button_Link}" Content="Edit" Click="BackupPathEdit_Click" />
             </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label>Authenticaion code:</Label>
+                <Label x:Name="AuthenticationCode">undefined</Label>
+                <Button x:Name="AddCodeButton" Style="{DynamicResource Button_Link}" Content="Add" Click="AddAuthCode_Click" />
+                <Button x:Name="RemoveCodeButton" Style="{DynamicResource Button_Link}" Content="Remove" Click="RemoveAuthCode_Click" />
+            </StackPanel>
             
             <StackPanel Orientation="Horizontal">
                 <Label Style="{DynamicResource H1}">Appearance</Label>
