@@ -114,6 +114,14 @@ namespace PasswordManager.Helper
                 if (filename != null)
                 {
                     string file = File.ReadAllText(filename);
+                    bool isValidatedFile = ValidateDatFile(file);
+
+                    if(!isValidatedFile)
+                    {
+                        ToastService.Show("Incorrect format", Colors.Red);
+                        return;
+                    }
+
                     if (file != null)
                     {
                         using(Aes aes = Aes.Create())
@@ -134,6 +142,40 @@ namespace PasswordManager.Helper
             {
                 Debug.WriteLine("Load backup error: " + ex.Message);
                 ToastService.Show("Load backup error", Colors.Red);
+            }
+        }
+
+        private static bool ValidateDatFile(string content)
+        {
+            try
+            {
+                using var doc = JsonDocument.Parse(content);
+                if (doc.RootElement.ValueKind != JsonValueKind.Array)
+                    return false;
+
+                foreach (var item in doc.RootElement.EnumerateArray())
+                {
+                    if (item.ValueKind != JsonValueKind.Object)
+                        return false;
+
+                    var foundFields = new HashSet<string>();
+                    foreach (var prop in item.EnumerateObject())
+                    {
+                        if (prop.Value.ValueKind != JsonValueKind.String)
+                            return false;
+                        foundFields.Add(prop.Name);
+                    }
+
+                    if (foundFields.Count != 4 || !foundFields.SetEquals(new[] { "Title", "Login", "Password", "Additional" }))
+                        return false;
+                }
+
+                return true;
+            }
+            catch (JsonException ex)
+            {
+                Debug.WriteLine("Incorrect format: " + ex.Message);
+                return false;
             }
         }
     }

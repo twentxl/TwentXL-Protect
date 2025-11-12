@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:PasswordManager"
+        xmlns:local="clr-namespace:PasswordManager" xmlns:svgc="http://sharpvectors.codeplex.com/svgc/"
         mc:Ignorable="d"
         Background="{DynamicResource WindowBackground}"
         WindowStyle="None"
@@ -32,7 +32,7 @@
 
                 <StackPanel Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0,0,0">
                     <Image Style="{DynamicResource Logo}" Margin="0,0,5,0"/>
-                    <Image Source="/Assets/Images/logo.png" Width="60" VerticalAlignment="Center"/>
+                    <svgc:SvgViewbox Source="/Assets/Images/logo.svg" Width="60" VerticalAlignment="Center" />
                     <Label FontSize="12">Protect</Label>
                 </StackPanel>
             </Grid>
@@ -49,7 +49,7 @@
                     <Label x:Name="ErrorMessage" Content="Wrong code" Foreground="Red" />
                 </StackPanel>
                 
-                <Button Grid.Row="1" Style="{DynamicResource Button_Link}" HorizontalAlignment="Left" FontSize="9">Destroy all</Button>
+                <Button Grid.Row="1" Style="{DynamicResource Button_Link}" HorizontalAlignment="Left" FontSize="9" Click="DestroyClick">Destroy all</Button>
                 <Grid Grid.Row="1" HorizontalAlignment="Right">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="100" />

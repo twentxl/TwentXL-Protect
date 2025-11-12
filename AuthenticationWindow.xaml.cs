@@ -66,5 +66,16 @@ namespace PasswordManager
                 MessageBox.Show("Decrypt error: the decryption keys are missing", "", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+
+        private void DestroyClick(object sender, RoutedEventArgs e)
+        {
+            var message = MessageBox.Show("\"Destroy all\" will lead to a complete cleanup of your data, including your passwords and authorization code. Are you sure you want to continue?", "Warning", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+            if(message == MessageBoxResult.Yes)
+            {
+                File.Delete(GlobalSettings.filePathAuth);
+                DataSettings.DestroyAll();
+                this.Close();
+            }
+        }
     }
 }

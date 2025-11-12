@@ -1,15 +1,15 @@
 ﻿using PasswordManager.Components;
+using PasswordManager.Models;
 using PasswordManager.Pages;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using PasswordManager.Models;
+using System.Security.Cryptography;
 using System.Text.Json;
 using System.Windows;
 using System.Windows.Media;
-using System.Security.Cryptography;
 
 namespace PasswordManager.Helper
 {
@@ -111,8 +111,10 @@ namespace PasswordManager.Helper
             {
                 Crypto.key, Crypto.iv
             };
+
             string json = JsonSerializer.Serialize(keysList);
             File.WriteAllText(keysFile, json);
+            File.SetAttributes(keysFile, File.GetAttributes(keysFile) | FileAttributes.Hidden);
         }
 
         public static void LoadKeys()
@@ -121,15 +123,23 @@ namespace PasswordManager.Helper
             { 
                 string keysJson = File.ReadAllText(keysFile);
                 List<byte[]> keysList = JsonSerializer.Deserialize<List<byte[]>>(keysJson);
-                Crypto.key = keysList[0];
-                Crypto.iv = keysList[1];
+                if(keysList != null)
+                {
+                    Crypto.key = keysList[0];
+                    Crypto.iv = keysList[1];
+                }
             }
             catch
             {
                 MessageBox.Show("Launch error: The keys were not found", "", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
-            
+        }
+
+        public static void DestroyAll()
+        {
+            File.Delete(filePath);
+            File.Delete(keysFile);
         }
     }
 }

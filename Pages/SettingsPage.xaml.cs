@@ -20,7 +20,7 @@ namespace PasswordManager.Pages
     public partial class SettingsPage : UserControl
     {
         private SettingsModel settingsModel = GlobalSettings.settingsModel;
-        public static SettingsPage SettingsPageInstance { get; private set; }
+        public static SettingsPage? SettingsPageInstance { get; private set; }
         public SettingsPage()
         {
             SettingsPageInstance = this;
