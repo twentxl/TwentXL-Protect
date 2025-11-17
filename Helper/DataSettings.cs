@@ -77,7 +77,7 @@ namespace PasswordManager.Helper
 
                 using(Aes aes = Aes.Create())
                 {
-                    if((Crypto.key == null || Crypto.key.Length == 0) && (Crypto.iv == null || Crypto.iv.Length == 0))
+                    if((Crypto.key == null || Crypto.key.Length == 0) || (Crypto.iv == null || Crypto.iv.Length == 0))
                     {
                         aes.KeySize = 256;
                         aes.GenerateKey();
