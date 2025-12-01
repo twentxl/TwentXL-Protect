@@ -41,13 +41,13 @@
 
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Column="2">
                     <Button x:Name="ButtonMinimize" Width="40" Style="{DynamicResource TitleBar_Button}" Click="ButtonMinimize_Click">
-                        <Image Source="/Assets/Images/minimizeIcon.png"/>
+                        <Image Style="{DynamicResource Title_Minimize}"/>
                     </Button>
                     <Button x:Name="ButtonMaximize" Width="40" Style="{DynamicResource TitleBar_Button}" Click="ButtonMaximize_Click">
-                        <Image Source="/Assets/Images/maximizeIcon.png"/>
+                        <Image Style="{DynamicResource Title_Maximize}"/>
                     </Button>
                     <Button x:Name="ButtonClose" Width="40" Style="{DynamicResource TitleBar_Button}" Click="ButtonClose_Click">
-                        <Image Source="/Assets/Images/closeIcon.png"/>
+                        <Image Style="{DynamicResource Title_Close}"/>
                     </Button>
                 </StackPanel>
             </Grid>

@@ -7,6 +7,15 @@
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="Width" Value="15" />
     </Style>
+    <Style x:Key="Title_Close" TargetType="Image">
+        <Setter Property="Source" Value="/Assets/Images/closeIcon_dark.png" />
+    </Style>
+    <Style x:Key="Title_Minimize" TargetType="Image">
+        <Setter Property="Source" Value="/Assets/Images/minimizeIcon_dark.png" />
+    </Style>
+    <Style x:Key="Title_Maximize" TargetType="Image">
+        <Setter Property="Source" Value="/Assets/Images/maximizeIcon_dark.png" />
+    </Style>
 
     <Style TargetType="Label">
         <Setter Property="Foreground" Value="#1C1C1C" />
