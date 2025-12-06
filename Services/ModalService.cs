@@ -14,6 +14,7 @@ namespace PasswordManager.Services
 
         public static void HideModal()
         {
+            ModalDialog.Instance?.ModalContent.Children.Clear();
             MainWindow.Instance?.ModalDialog_Area.Children.Clear();
         }
     }
