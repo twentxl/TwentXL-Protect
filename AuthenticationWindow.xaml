@@ -32,7 +32,6 @@
 
                 <StackPanel Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0,0,0">
                     <Image Style="{DynamicResource Logo}" Margin="0,0,5,0"/>
-                    <svgc:SvgViewbox Source="/Assets/Images/logo.svg" Width="60" VerticalAlignment="Center" />
                     <Label FontSize="12">Protect</Label>
                 </StackPanel>
             </Grid>
