@@ -13,9 +13,9 @@ using System.Windows.Media;
 
 namespace PasswordManager.Helper
 {
-    public class DataSettings
+    internal class DataSettings
     {
-        private static string localAppData = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+        private readonly static string localAppData = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
         public static string filePath = Path.Combine(localAppData, "TwentXL Protect", "user_credentials.dat");
         private static string keysFile = Path.Combine(localAppData, "TwentXL Protect", "keys.json");
 
