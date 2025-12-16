@@ -14,12 +14,11 @@ using System.Windows.Media;
 
 namespace PasswordManager.Helper
 {
-    public class GlobalSettings
+    internal class GlobalSettings : ASettings
     {
-        private const string LightThemePath = "pack://application:,,,/Styles.xaml";
-        private const string DarkThemePath = "pack://application:,,,/Styles_Dark.xaml";
-        private static string filePathSettings = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "TwentXL Protect", "settings.json");
-        public static string filePathAuth = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "TwentXL Protect", "authcode.dat");
+        private readonly static string localAppData = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+        private static string filePathSettings = Path.Combine(localAppData, "TwentXL Protect", "settings.json");
+        public static string filePathAuth = Path.Combine(localAppData, "TwentXL Protect", "authcode.dat");
 
         public static SettingsModel settingsModel = new SettingsModel();
         public static bool isAuth = false;

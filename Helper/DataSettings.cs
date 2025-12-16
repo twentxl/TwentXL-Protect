@@ -13,7 +13,7 @@ using System.Windows.Media;
 
 namespace PasswordManager.Helper
 {
-    internal class DataSettings
+    internal class DataSettings : ASettings
     {
         private readonly static string localAppData = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
         public static string filePath = Path.Combine(localAppData, "TwentXL Protect", "user_credentials.dat");
