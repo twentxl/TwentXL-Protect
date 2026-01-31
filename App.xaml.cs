@@ -32,9 +32,6 @@ namespace PasswordManager
                 "startup_error.log"
             );
                 System.IO.File.WriteAllText(logPath, ex.ToString());
-
-                // Показываем окно (если возможно)
-                MessageBox.Show($"Ошибка запуска:\n{ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
     }

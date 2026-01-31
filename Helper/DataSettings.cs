@@ -7,6 +7,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
+using System.Text.Encodings.Web;
 using System.Text.Json;
 using System.Windows;
 using System.Windows.Media;
@@ -73,7 +74,12 @@ namespace PasswordManager.Helper
                     }
                 }
 
-                string json = JsonSerializer.Serialize(passwordList);
+                var options = new JsonSerializerOptions
+                {
+                    Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping,
+                    WriteIndented = true
+                };
+                string json = JsonSerializer.Serialize(passwordList, options);
 
                 using(Aes aes = Aes.Create())
                 {
