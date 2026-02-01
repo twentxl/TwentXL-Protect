@@ -32,7 +32,7 @@ namespace PasswordManager.Helper
                     SaveJson();
 
                 string file = File.ReadAllText(filePath);
-                if (string.IsNullOrEmpty(file) || string.IsNullOrWhiteSpace(file))
+                if (!string.IsNullOrEmpty(file) || !string.IsNullOrWhiteSpace(file))
                 {
                     LoadKeys();
                     using (Aes aes = Aes.Create())
