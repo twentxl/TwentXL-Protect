@@ -44,13 +44,13 @@ namespace PasswordManager.Components
                 aes.IV = Crypto.iv;
 
                 string file = Crypto.Encrypt(Code.Text, Crypto.key, Crypto.iv);
-                File.WriteAllText(GlobalSettings.filePathAuth, file);
+                File.WriteAllText(ASettings.public_filePathAuth, file);
             }
 
             ModalService.HideModal();
             ToastService.Show("Authentication code was added", Colors.Green);
-            GlobalSettings.SaveSettings();
-            GlobalSettings.LoadSettings();
+            App.globalSettings?.SaveSettings();
+            App.globalSettings?.LoadSettings();
             SettingsPage.SettingsPageInstance?.UpdateSettings();
         }
     }

@@ -1,20 +1,21 @@
 ﻿using PasswordManager.Components;
 using PasswordManager.Helper;
+using PasswordManager.Helper.Interfaces;
 using PasswordManager.Models;
 using PasswordManager.Pages;
+using PasswordManager.Services;
 using System.Diagnostics;
 using System.IO;
 using System.Text.Json;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using PasswordManager.Services;
 
 namespace PasswordManager
 {
     public partial class MainWindow : Window
     {
-        public static MainWindow Instance { get; private set; }
+        public static MainWindow? Instance { get; private set; }
 
         private readonly MainPage mainPage = new MainPage();
         private readonly SettingsPage settingsPage = new SettingsPage();
@@ -25,13 +26,14 @@ namespace PasswordManager
             InitializeComponent();
             ToastService.Initialize(MyToast);
             Instance = this;
+
             MainPageShow();
         }
 
         protected override void OnClosed(EventArgs e)
         {
-            DataSettings.SaveJson();
-            GlobalSettings.SaveSettings();
+            App.dataSettings?.SaveJson();
+            App.globalSettings?.SaveSettings();
             base.OnClosed(e);
         }
 
@@ -105,12 +107,12 @@ namespace PasswordManager
 
         private void CreateBackup_Click(object sender, RoutedEventArgs e)
         {
-            GlobalSettings.CreateBackup();
+            App.globalSettings?.CreateBackup();
         }
 
         private void LoadBackup_Click(object sender, RoutedEventArgs e)
         {
-            GlobalSettings.LoadBackup();
+            App.globalSettings?.LoadBackup();
         }
     }
 }

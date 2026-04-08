@@ -9,7 +9,6 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
-using System.IO;
 using PasswordManager.Components;
 using PasswordManager.Helper;
 using PasswordManager.Models;
@@ -43,7 +42,7 @@ namespace PasswordManager.Pages
                 settingsModel.DarkTheme = true;
 
             UpdateSettings();
-            GlobalSettings.ApplyTheme(settingsModel.DarkTheme);
+            App.globalSettings?.ApplyTheme(settingsModel.DarkTheme);
         }
 
         private void AddAuthCode_Click(object sender, RoutedEventArgs e)
@@ -54,8 +53,8 @@ namespace PasswordManager.Pages
 
         private void RemoveAuthCode_Click(object sender, RoutedEventArgs e)
         {
-            File.Delete(GlobalSettings.filePathAuth);
-            GlobalSettings.LoadSettings();
+            File.Delete(ASettings.public_filePathAuth);
+            App.globalSettings?.LoadSettings();
             UpdateSettings();
         }
 
@@ -73,7 +72,7 @@ namespace PasswordManager.Pages
                 AddCodeButton.Visibility = Visibility.Collapsed;
                 RemoveCodeButton.Visibility = AuthenticationCode.Visibility = Visibility.Visible;
 
-                string code = File.ReadAllText(GlobalSettings.filePathAuth);
+                string code = File.ReadAllText(ASettings.public_filePathAuth);
                 AuthenticationCode.Content = code;
             }
             else

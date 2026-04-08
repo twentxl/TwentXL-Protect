@@ -12,6 +12,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Security.Cryptography;
 using System.Windows.Shapes;
+using PasswordManager.Helper.Interfaces;
+using System.Diagnostics;
 
 namespace PasswordManager
 {
@@ -38,11 +40,11 @@ namespace PasswordManager
         {
             try
             {
-                string code = File.ReadAllText(GlobalSettings.filePathAuth);
+                string code = File.ReadAllText(ASettings.public_filePathAuth);
 
                 using (Aes aes = Aes.Create())
                 {
-                    DataSettings.LoadKeys();
+                    App.dataSettings?.LoadKeys();
                     aes.Key = Crypto.key;
                     aes.IV = Crypto.iv;
 
@@ -64,6 +66,7 @@ namespace PasswordManager
             catch(Exception ex)
             {
                 MessageBox.Show("Decrypt error: the decryption keys are missing", "", MessageBoxButton.OK, MessageBoxImage.Error);
+                Debug.Write("Decrypt error: the decryption keys are missing: " + ex.Message);
             }
         }
 
@@ -72,8 +75,8 @@ namespace PasswordManager
             var message = MessageBox.Show("\"Destroy all\" will lead to a complete cleanup of your data, including your passwords and authorization code. Are you sure you want to continue?", "Warning", MessageBoxButton.YesNo, MessageBoxImage.Warning);
             if(message == MessageBoxResult.Yes)
             {
-                File.Delete(GlobalSettings.filePathAuth);
-                DataSettings.DestroyAll();
+                File.Delete(ASettings.public_filePathAuth);
+                App.dataSettings?.DestroyAll();
                 this.Close();
             }
         }

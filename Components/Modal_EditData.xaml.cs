@@ -56,7 +56,7 @@ namespace PasswordManager.Components
             }
             finally
             {
-                DataSettings.SaveJson();
+                App.dataSettings?.SaveJson();
             }
         }
 

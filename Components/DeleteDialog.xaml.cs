@@ -37,7 +37,7 @@ namespace PasswordManager.Components
             MainPage.MainPageInstance?.DataBlockStackPanel.Children.Remove(dataBlock);
             ModalService.HideModal();
             ToastService.Show("Block was deleted", Colors.Orange);
-            DataSettings.SaveJson();
+            App.dataSettings.SaveJson();
         }
     }
 }

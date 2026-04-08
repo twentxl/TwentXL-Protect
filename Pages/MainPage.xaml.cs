@@ -6,6 +6,7 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using PasswordManager.Components;
 using PasswordManager.Helper;
+using PasswordManager.Helper.Interfaces;
 using PasswordManager.Services;
 
 namespace PasswordManager.Pages
@@ -18,7 +19,8 @@ namespace PasswordManager.Pages
         {
             InitializeComponent();
             MainPageInstance = this;
-            DataSettings.LoadJson();
+
+            App.dataSettings.LoadJson();
         }
 
         private void AddPassword_Click(object sender, RoutedEventArgs e)

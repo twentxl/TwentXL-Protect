@@ -6,7 +6,7 @@ namespace PasswordManager.Services
 {
     class ModalService
     {
-        private static ModalDialog currentModal;
+        private static ModalDialog? currentModal;
 
         public static void ShowModal(UIElement element)
         {

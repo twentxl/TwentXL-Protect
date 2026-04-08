@@ -1,4 +1,5 @@
 ﻿using PasswordManager.Components;
+using PasswordManager.Helper.Interfaces;
 using PasswordManager.Models;
 using PasswordManager.Pages;
 using PasswordManager.Services;
@@ -14,16 +15,19 @@ using System.Windows.Media;
 
 namespace PasswordManager.Helper
 {
-    internal class GlobalSettings : ASettings
+    internal class GlobalSettings : ASettings, IGlobalSettings
     {
-        private readonly static string localAppData = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
-        private static string filePathSettings = Path.Combine(localAppData, "TwentXL Protect", "settings.json");
-        public static string filePathAuth = Path.Combine(localAppData, "TwentXL Protect", "authcode.dat");
-
         public static SettingsModel settingsModel = new SettingsModel();
         public static bool isAuth = false;
 
-        public static void LoadSettings()
+        public IBackupSettings _backupSettings;
+
+        public GlobalSettings(IBackupSettings backupSettings)
+        {
+            _backupSettings = backupSettings;
+        }
+
+        public void LoadSettings()
         {
             string directorySettings = Path.GetDirectoryName(filePathSettings)!;
             Directory.CreateDirectory(directorySettings);
@@ -33,20 +37,24 @@ namespace PasswordManager.Helper
 
             if (File.Exists(filePathAuth))
                 isAuth = true;
-            else isAuth = false;
+            else 
+                isAuth = false;
 
-                string json = File.ReadAllText(filePathSettings);
+            string json = File.ReadAllText(filePathSettings);
             if(json != null)
             {
                 SettingsModel settingsList = JsonSerializer.Deserialize<SettingsModel>(json);
-                settingsModel.DarkTheme = settingsList.DarkTheme;
-                settingsModel.BackupPath = settingsList.BackupPath;
+                if(settingsList != null)
+                {
+                    settingsModel.DarkTheme = settingsList.DarkTheme;
+                    settingsModel.BackupPath = settingsList.BackupPath;
+                }
             }
 
             ApplyTheme(settingsModel.DarkTheme);
         }
 
-        public static void SaveSettings()
+        public void SaveSettings()
         {
             try
             {
@@ -60,7 +68,17 @@ namespace PasswordManager.Helper
             }
         }
 
-        public static void ApplyTheme(bool isDark)
+        public void CreateBackup()
+        {
+            _backupSettings.CreateBackup(settingsModel);
+        }
+
+        public void LoadBackup()
+        {
+            _backupSettings.LoadBackup();
+        }
+
+        public void ApplyTheme(bool isDark)
         {
             string themePath;
 
@@ -78,106 +96,6 @@ namespace PasswordManager.Helper
             app.Resources.MergedDictionaries.Add(dict);
 
             SaveSettings();
-        }
-
-        public static void CreateBackup()
-        {
-            try
-            {
-                List<PasswordModel> passwordList = new List<PasswordModel>();
-                var dataBlockPanel = MainPage.MainPageInstance?.DataBlockStackPanel.Children;
-
-                foreach (var item in dataBlockPanel)
-                {
-                    if (item is DataBlock dataBlock)
-                    {
-                        passwordList.Add(new PasswordModel { Title = dataBlock.Title_Content.Content.ToString(), Login = dataBlock.Login_Content.Content.ToString(), Password = dataBlock.Password_Content.Text, Additional = dataBlock.Additional_Content.Text, CreatedDate = dataBlock.CreatedDate_Content.Text });
-                    }
-                }
-
-                string json = JsonSerializer.Serialize(passwordList);
-
-                File.WriteAllText(Path.Combine(settingsModel.BackupPath, "credentialds_backup.dat"), json);
-                ToastService.Show($"Backup created '{settingsModel.BackupPath}'");
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine("Credentials backup error: " + ex.Message);
-                ToastService.Show("Credentials backup error", Colors.Red);
-            }
-        }
-
-        public static void LoadBackup()
-        {
-            try
-            {
-                string filename = Utils.SelectFile();
-                if (filename != null)
-                {
-                    string file = File.ReadAllText(filename);
-                    bool isValidatedFile = ValidateDatFile(file);
-
-                    if(!isValidatedFile)
-                    {
-                        ToastService.Show("Incorrect format", Colors.Red);
-                        return;
-                    }
-
-                    if (file != null)
-                    {
-                        using(Aes aes = Aes.Create())
-                        {
-                            aes.Key = Crypto.key;
-                            aes.IV = Crypto.iv;
-
-                            file = Crypto.Encrypt(file, Crypto.key, Crypto.iv);
-                            File.WriteAllText(DataSettings.filePath, file);
-                        }
-                        DataSettings.LoadJson();
-                        ToastService.Show("Backup was loaded!", Colors.Green);
-                    }
-                }
-                else ToastService.Show("File is not selected", Colors.Red);
-            }
-            catch(Exception ex)
-            {
-                Debug.WriteLine("Load backup error: " + ex.Message);
-                ToastService.Show("Load backup error", Colors.Red);
-            }
-        }
-
-        private static bool ValidateDatFile(string content)
-        {
-            try
-            {
-                using var doc = JsonDocument.Parse(content);
-                if (doc.RootElement.ValueKind != JsonValueKind.Array)
-                    return false;
-
-                foreach (var item in doc.RootElement.EnumerateArray())
-                {
-                    if (item.ValueKind != JsonValueKind.Object)
-                        return false;
-
-                    var foundFields = new HashSet<string>();
-                    foreach (var prop in item.EnumerateObject())
-                    {
-                        if (prop.Value.ValueKind != JsonValueKind.String)
-                            return false;
-                        foundFields.Add(prop.Name);
-                    }
-
-                    if (foundFields.Count != 5 || !foundFields.SetEquals(new[] { "Title", "Login", "Password", "Additional", "CreatedDate" }))
-                        return false;
-                }
-
-                return true;
-            }
-            catch (JsonException ex)
-            {
-                Debug.WriteLine("Incorrect format: " + ex.Message);
-                return false;
-            }
         }
     }
 }

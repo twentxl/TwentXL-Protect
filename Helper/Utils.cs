@@ -2,8 +2,10 @@
 using PasswordManager.Services;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
 using System.Windows;
 using System.Windows.Forms;
 
@@ -58,6 +60,40 @@ namespace PasswordManager.Helper
                 MainPage.MainPageInstance.EmptyPasswords_Message.Visibility = Visibility.Hidden;
             else
                 MainPage.MainPageInstance.EmptyPasswords_Message.Visibility = Visibility.Visible;
+        }
+
+        public static bool ValidateDatFile(string content)
+        {
+            try
+            {
+                using var doc = JsonDocument.Parse(content);
+                if (doc.RootElement.ValueKind != JsonValueKind.Array)
+                    return false;
+
+                foreach (var item in doc.RootElement.EnumerateArray())
+                {
+                    if (item.ValueKind != JsonValueKind.Object)
+                        return false;
+
+                    var foundFields = new HashSet<string>();
+                    foreach (var prop in item.EnumerateObject())
+                    {
+                        if (prop.Value.ValueKind != JsonValueKind.String)
+                            return false;
+                        foundFields.Add(prop.Name);
+                    }
+
+                    if (foundFields.Count != 5 || !foundFields.SetEquals(new[] { "Title", "Login", "Password", "Additional", "CreatedDate" }))
+                        return false;
+                }
+
+                return true;
+            }
+            catch (JsonException ex)
+            {
+                Debug.WriteLine("Incorrect format: " + ex.Message);
+                return false;
+            }
         }
     }
 }
