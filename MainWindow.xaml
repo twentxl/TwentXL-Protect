@@ -27,7 +27,7 @@
             </Grid.RowDefinitions>
 
             <Grid Grid.Row="0" Style="{DynamicResource TitleBar}" MouseDown="Titlebar_MouseDown">
-                <Label x:Name="PageName" Foreground="#ffffff" HorizontalAlignment="Center" Content="PageName" />
+                <Label x:Name="PageName" HorizontalAlignment="Center" Content="PageName" />
 
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                     <Button x:Name="ButtonMinimize" Width="40" Style="{DynamicResource TitleBar_Button}" Click="ButtonMinimize_Click">
@@ -48,7 +48,7 @@
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
 
-                <Grid Grid.Column="0" Background="{DynamicResource MainColor}">
+                <Grid Grid.Column="0" Background="{DynamicResource WindowMenuColor}">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="70" />
                         <RowDefinition Height="*" />

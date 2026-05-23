@@ -3,13 +3,14 @@
                     xmlns:svgc="http://sharpvectors.codeplex.com/svgc/"
                     xmlns:sys="clr-namespace:System;assembly=mscorlib">
     <SolidColorBrush x:Key="WindowBackground" Color="#0F1117"/>
+    <SolidColorBrush x:Key="WindowMenuColor" Color="#141625" />
     <SolidColorBrush x:Key="MainColor" Color="#111827" />
     <SolidColorBrush x:Key="MainColorHover" Color="#1F2933" />
     <SolidColorBrush x:Key="MainColorActive" Color="#0B1120" />
     <SolidColorBrush x:Key="TextColor" Color="#F9FAFB" />
     <SolidColorBrush x:Key="TextColorSecondary" Color="#D1D5DB" />
     <SolidColorBrush x:Key="TextColorAdditional" Color="#9CA3AF" />
-    <SolidColorBrush x:Key="GrayColor" Color="#272B3A" />
+    <SolidColorBrush x:Key="SearchBlockColor" Color="#272B3A" />
     <SolidColorBrush x:Key="TextBoxPlaceholder" Color="#6B7280" />
     <SolidColorBrush x:Key="DataBlockHover" Color="#333333" />
     <sys:Double x:Key="FontSize">14</sys:Double>
@@ -31,15 +32,10 @@
 
     <!--LeftBarSeparator-->
     <Style x:Key="LeftBarSeparator" TargetType="Border">
-        <Setter Property="IsHitTestVisible" Value="False" />
-        <Setter Property="Background">
-            <Setter.Value>
-                <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
-                    <GradientStop Color="#80272B3A" Offset="0"/>
-                    <GradientStop Color="#00272B3A" Offset="1"/>
-                </LinearGradientBrush>
-            </Setter.Value>
-        </Setter>
+        <Setter Property="IsHitTestVisible" Value="False"/>
+        <Setter Property="Width" Value="1"/>
+        <Setter Property="Background" Value="{StaticResource SearchBlockColor}"/>
+        <Setter Property="SnapsToDevicePixels" Value="True"/>
     </Style>
 
     <!--Toast-->
@@ -54,7 +50,7 @@
 
     <!--TitleBar-->
     <Style x:Key="TitleBar" TargetType="Grid">
-        <Setter Property="Background" Value="#141625" />
+        <Setter Property="Background" Value="{StaticResource WindowMenuColor}" />
     </Style>
 
     <!--Context Menu-->

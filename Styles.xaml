@@ -3,25 +3,27 @@
                     xmlns:svgc="http://sharpvectors.codeplex.com/svgc/" 
                     xmlns:sys="clr-namespace:System;assembly=mscorlib">
     <SolidColorBrush x:Key="WindowBackground" Color="#FFFFFF"/>
+    <SolidColorBrush x:Key="WindowMenuColor" Color="#EEF2FF" />
+    <SolidColorBrush x:Key="LightHover" Color="#D7DFFF" />
     <SolidColorBrush x:Key="MainColor" Color="#141625" />
     <SolidColorBrush x:Key="MainColorHover" Color="#202338" />
     <SolidColorBrush x:Key="MainColorActive" Color="#1A1D32" />
     <SolidColorBrush x:Key="TextColor" Color="#1C1C1C" />
     <SolidColorBrush x:Key="TextColorSecondary" Color="#979AAD" />
     <SolidColorBrush x:Key="TextColorAdditional" Color="#6B728E" />
-    <SolidColorBrush x:Key="GrayColor" Color="#EBECF3" />
+    <SolidColorBrush x:Key="SearchBlockColor" Color="#EBECF3" />
     <SolidColorBrush x:Key="TextBoxPlaceholder" Color="#757575" />
     <SolidColorBrush x:Key="DataBlockHover" Color="#EEEEEE" />
     <sys:Double x:Key="FontSize">14</sys:Double>
     
     <Style x:Key="Title_Close" TargetType="Image">
-        <Setter Property="Source" Value="/Assets/Images/closeIcon.png" />
+        <Setter Property="Source" Value="/Assets/Images/closeIcon_dark.png" />
     </Style>
     <Style x:Key="Title_Minimize" TargetType="Image">
-        <Setter Property="Source" Value="/Assets/Images/minimizeIcon.png" />
+        <Setter Property="Source" Value="/Assets/Images/minimizeIcon_dark.png" />
     </Style>
     <Style x:Key="Title_Maximize" TargetType="Image">
-        <Setter Property="Source" Value="/Assets/Images/maximizeIcon.png" />
+        <Setter Property="Source" Value="/Assets/Images/maximizeIcon_dark.png" />
     </Style>
 
     <Style TargetType="Label">
@@ -31,15 +33,10 @@
 
     <!--LeftBarSeparator-->
     <Style x:Key="LeftBarSeparator" TargetType="Border">
-        <Setter Property="IsHitTestVisible" Value="False" />
-        <Setter Property="Background">
-            <Setter.Value>
-                <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
-                    <GradientStop Color="#80B3B3B3" Offset="0"/>
-                    <GradientStop Color="#00B3B3B3" Offset="1"/>
-                </LinearGradientBrush>
-            </Setter.Value>
-        </Setter>
+        <Setter Property="IsHitTestVisible" Value="False"/>
+        <Setter Property="Width" Value="1"/>
+        <Setter Property="Background" Value="{StaticResource SearchBlockColor}"/>
+        <Setter Property="SnapsToDevicePixels" Value="True"/>
     </Style>
 
     <!--Toast-->
@@ -54,7 +51,7 @@
 
     <!--TitleBar-->
     <Style x:Key="TitleBar" TargetType="Grid">
-        <Setter Property="Background" Value="#141625" />
+        <Setter Property="Background" Value="{StaticResource WindowMenuColor}" />
     </Style>
     
     <!--Context Menu-->
@@ -203,10 +200,7 @@
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Background" Value="{StaticResource MainColorHover}"/>
-                        </Trigger>
-                        <Trigger Property="IsPressed" Value="True">
-                            <Setter Property="Background" Value="{StaticResource MainColorActive}"/>
+                            <Setter Property="Background" Value="{StaticResource LightHover}"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -229,10 +223,7 @@
                     <ControlTemplate.Triggers>
 
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter TargetName="border" Property="Background" Value="{StaticResource MainColorHover}"/>
-                        </Trigger>
-                        <Trigger Property="IsPressed" Value="True">
-                            <Setter TargetName="border" Property="Background" Value="{StaticResource MainColor}"/>
+                            <Setter TargetName="border" Property="Background" Value="{StaticResource LightHover}"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
