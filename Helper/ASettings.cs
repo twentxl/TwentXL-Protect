@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace PasswordManager.Helper
 {
-    internal abstract class ASettings
+    internal class ASettings
     {
         private readonly static string localAppData = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
 
