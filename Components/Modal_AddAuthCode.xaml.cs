@@ -15,14 +15,19 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Security.Cryptography;
+using PasswordManager.Helper.Interfaces;
 
 namespace PasswordManager.Components
 {
     public partial class Modal_AddAuthCode : UserControl
     {
-        public Modal_AddAuthCode()
+        private IGlobalSettings _globalSettings;
+
+        public Modal_AddAuthCode(IGlobalSettings globalSettings)
         {
             InitializeComponent();
+
+            _globalSettings = globalSettings;
         }
 
         private void Cancel_Click(object sender, RoutedEventArgs e)
@@ -49,8 +54,8 @@ namespace PasswordManager.Components
 
             ModalService.HideModal();
             ToastService.Show("Authentication code was added", Colors.Green);
-            App.globalSettings?.SaveSettings();
-            App.globalSettings?.LoadSettings();
+            _globalSettings.SaveSettings();
+            _globalSettings.LoadSettings();
             SettingsPage.SettingsPageInstance?.UpdateSettings();
         }
     }

@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using Microsoft.Extensions.DependencyInjection;
 using PasswordManager.Components;
 using PasswordManager.Helper;
 using PasswordManager.Helper.Interfaces;
@@ -13,19 +14,21 @@ namespace PasswordManager.Pages
 {
     public partial class MainPage : UserControl
     {
-        public static MainPage MainPageInstance { get; private set; }
+        public static MainPage? MainPageInstance { get; private set; }
+        private IDataSettings _dataSettings;
 
-        public MainPage()
+        public MainPage(IDataSettings dataSettings)
         {
             InitializeComponent();
             MainPageInstance = this;
+            _dataSettings = dataSettings;
 
-            App.dataSettings.LoadJson();
+            _dataSettings.LoadJson();
         }
 
         private void AddPassword_Click(object sender, RoutedEventArgs e)
         {
-            Modal_AddData modal_addData = new Modal_AddData();
+            Modal_AddData modal_addData = App.Services.GetRequiredService<Modal_AddData>();
             ModalService.ShowModal(modal_addData);
         }
 

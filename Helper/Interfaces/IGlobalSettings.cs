@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace PasswordManager.Helper.Interfaces
 {
-    internal interface IGlobalSettings
+    public interface IGlobalSettings
     {
         public void LoadSettings();
         public void SaveSettings();

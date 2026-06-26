@@ -15,7 +15,7 @@ using System.Windows.Media;
 
 namespace PasswordManager.Helper
 {
-    internal class DataSettings : ASettings, IDataSettings
+    public class DataSettings : ASettings, IDataSettings
     {
         private IJsonSettings _jsonSettings;
         private IKeysSettings _keysSettings;

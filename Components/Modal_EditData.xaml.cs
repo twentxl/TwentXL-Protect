@@ -1,4 +1,5 @@
 ﻿using PasswordManager.Helper;
+using PasswordManager.Helper.Interfaces;
 using PasswordManager.Pages;
 using PasswordManager.Services;
 using System.Diagnostics;
@@ -11,12 +12,16 @@ namespace PasswordManager.Components
     public partial class Modal_EditData : UserControl
     {
         private DataBlockContent? dataBlockContent = DataBlockContent.Instance;
-        private DataBlock dataBlock;
+        private DataBlock _dataBlock;
+        private IDataSettings _dataSettings;
 
-        public Modal_EditData(DataBlock dataBlock, string title, string login, string password, string additional)
+        public Modal_EditData(DataBlock dataBlock, IDataSettings dataSettings, string title, string login, string password, string additional)
         {
             InitializeComponent();
-            this.dataBlock = dataBlock;
+
+            _dataBlock = dataBlock;
+            _dataSettings = dataSettings;
+
             Title.Text = title;
             Login.Text = login;
             Password.Text = password;
@@ -56,7 +61,7 @@ namespace PasswordManager.Components
             }
             finally
             {
-                App.dataSettings?.SaveJson();
+                _dataSettings.SaveJson();
             }
         }
 
@@ -70,7 +75,7 @@ namespace PasswordManager.Components
                 x.Additional_Content.Text = additional;
             }
 
-            Fill(dataBlock, (x, v) => x.Login_Content.Content = v);
+            Fill(_dataBlock, (x, v) => x.Login_Content.Content = v);
 
             if(dataBlockContent != null)
             {
@@ -88,8 +93,6 @@ namespace PasswordManager.Components
                 if (string.IsNullOrEmpty(additional)) dataBlockContent.Additional_Block.Visibility = Visibility.Collapsed;
                 else dataBlockContent.Additional_Block.Visibility = Visibility.Visible;
             }
-
-            // I understand that the code can be written easier, but I'm too lazy.
         }
 
         private bool FieldValidation(TextBox textBox)

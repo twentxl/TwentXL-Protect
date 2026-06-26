@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PasswordManager.Helper.Interfaces
 {
-    internal interface IDataSettings
+    public interface IDataSettings
     {
         public void LoadJson();
 

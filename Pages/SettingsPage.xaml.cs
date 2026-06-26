@@ -9,8 +9,10 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
+using Microsoft.Extensions.DependencyInjection;
 using PasswordManager.Components;
 using PasswordManager.Helper;
+using PasswordManager.Helper.Interfaces;
 using PasswordManager.Models;
 using PasswordManager.Services;
 
@@ -20,9 +22,13 @@ namespace PasswordManager.Pages
     {
         private SettingsModel settingsModel = GlobalSettings.settingsModel;
         public static SettingsPage? SettingsPageInstance { get; private set; }
-        public SettingsPage()
+        private IGlobalSettings _globalSettings;
+
+        public SettingsPage(IGlobalSettings globalSettings)
         {
             SettingsPageInstance = this;
+            _globalSettings = globalSettings;
+
             InitializeComponent();
             UpdateSettings();
         }
@@ -42,19 +48,19 @@ namespace PasswordManager.Pages
                 settingsModel.DarkTheme = true;
 
             UpdateSettings();
-            App.globalSettings?.ApplyTheme(settingsModel.DarkTheme);
+            _globalSettings.ApplyTheme(settingsModel.DarkTheme);
         }
 
         private void AddAuthCode_Click(object sender, RoutedEventArgs e)
         {
-            Modal_AddAuthCode modalAddAuthCode = new Modal_AddAuthCode();
+            Modal_AddAuthCode modalAddAuthCode = App.Services.GetRequiredService<Modal_AddAuthCode>();
             ModalService.ShowModal(modalAddAuthCode);
         }
 
         private void RemoveAuthCode_Click(object sender, RoutedEventArgs e)
         {
             File.Delete(ASettings.public_filePathAuth);
-            App.globalSettings?.LoadSettings();
+            _globalSettings.LoadSettings();
             UpdateSettings();
         }
 

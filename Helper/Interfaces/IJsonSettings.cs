@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PasswordManager.Helper.Interfaces
 {
-    internal interface IJsonSettings
+    public interface IJsonSettings
     {
         public void LoadJson(string filePath);
         public void SaveJson(string filePath);

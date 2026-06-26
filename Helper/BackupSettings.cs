@@ -16,7 +16,7 @@ using System.Windows.Media;
 
 namespace PasswordManager.Helper
 {
-    internal class BackupSettings : ASettings, IBackupSettings
+    public class BackupSettings : ASettings, IBackupSettings
     {
         private IDataSettings _dataSettings;
 

@@ -1,4 +1,5 @@
 ﻿using PasswordManager.Helper;
+using PasswordManager.Helper.Interfaces;
 using PasswordManager.Pages;
 using PasswordManager.Services;
 using System;
@@ -20,11 +21,15 @@ namespace PasswordManager.Components
 {
     public partial class DeleteDialog : UserControl
     {
-        private DataBlock dataBlock;
-        public DeleteDialog(DataBlock dataBlock)
+        private IDataSettings _dataSettings;
+        private DataBlock _dataBlock;
+
+        public DeleteDialog(DataBlock dataBlock, IDataSettings dataSettings)
         {
             InitializeComponent();
-            this.dataBlock = dataBlock;
+
+            _dataBlock = dataBlock;
+            _dataSettings = dataSettings;
         }
 
         private void Cancel_Click(object sender, RoutedEventArgs e)
@@ -34,10 +39,10 @@ namespace PasswordManager.Components
 
         private void Delete_Click(object sender, RoutedEventArgs e)
         {
-            MainPage.MainPageInstance?.DataBlockStackPanel.Children.Remove(dataBlock);
+            MainPage.MainPageInstance?.DataBlockStackPanel.Children.Remove(_dataBlock);
             ModalService.HideModal();
             ToastService.Show("Block was deleted", Colors.Orange);
-            App.dataSettings.SaveJson();
+            _dataSettings.SaveJson();
         }
     }
 }

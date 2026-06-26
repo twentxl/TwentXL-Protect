@@ -6,14 +6,19 @@ using PasswordManager.Helper;
 using System.Windows.Media;
 using PasswordManager.Pages;
 using PasswordManager.Services;
+using PasswordManager.Helper.Interfaces;
 
 namespace PasswordManager.Components
 {
     public partial class Modal_AddData : UserControl
     {
-        public Modal_AddData()
+        private IDataSettings _dataSettings;
+
+        public Modal_AddData(IDataSettings dataSettings)
         {
             InitializeComponent();
+
+            _dataSettings = dataSettings;
         }
 
         private void Cancel_Click(object sender, RoutedEventArgs e)
@@ -45,7 +50,7 @@ namespace PasswordManager.Components
             }
             finally
             {
-                App.dataSettings?.SaveJson();
+                _dataSettings.SaveJson();
             }
         }
 

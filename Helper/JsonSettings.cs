@@ -15,7 +15,7 @@ using System.Security.Cryptography;
 
 namespace PasswordManager.Helper
 {
-    internal class JsonSettings : ASettings, IJsonSettings
+    public class JsonSettings : ASettings, IJsonSettings
     {
         private IKeysSettings _keysSettings;
 

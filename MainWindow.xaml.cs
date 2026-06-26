@@ -1,4 +1,5 @@
-﻿using PasswordManager.Components;
+﻿using Microsoft.Extensions.DependencyInjection;
+using PasswordManager.Components;
 using PasswordManager.Helper;
 using PasswordManager.Helper.Interfaces;
 using PasswordManager.Models;
@@ -17,23 +18,29 @@ namespace PasswordManager
     {
         public static MainWindow? Instance { get; private set; }
 
-        private readonly MainPage mainPage = new MainPage();
-        private readonly SettingsPage settingsPage = new SettingsPage();
+        private IDataSettings _dataSettings;
+        private IGlobalSettings _globalSettings;
+
+        private readonly MainPage mainPage = App.Services.GetRequiredService<MainPage>();
+        private readonly SettingsPage settingsPage = App.Services.GetRequiredService<SettingsPage>();
         private readonly FAQPage faqpage = new FAQPage();
 
-        public MainWindow()
+        public MainWindow(IDataSettings dataSettings, IGlobalSettings globalSettings)
         {
             InitializeComponent();
             ToastService.Initialize(MyToast);
             Instance = this;
+
+            _dataSettings = dataSettings;
+            _globalSettings = globalSettings;
 
             MainPageShow();
         }
 
         protected override void OnClosed(EventArgs e)
         {
-            App.dataSettings?.SaveJson();
-            App.globalSettings?.SaveSettings();
+            _dataSettings.SaveJson();
+            _globalSettings.SaveSettings();
             base.OnClosed(e);
         }
 
@@ -85,7 +92,7 @@ namespace PasswordManager
 
         private void BackupAction_Click(object sender, RoutedEventArgs e)
         {
-            Button button = sender as Button;
+            Button? button = sender as Button;
             button.ContextMenu.PlacementTarget = button;
             button.ContextMenu.IsOpen = true;
         }
@@ -107,12 +114,12 @@ namespace PasswordManager
 
         private void CreateBackup_Click(object sender, RoutedEventArgs e)
         {
-            App.globalSettings?.CreateBackup();
+            _globalSettings.CreateBackup();
         }
 
         private void LoadBackup_Click(object sender, RoutedEventArgs e)
         {
-            App.globalSettings?.LoadBackup();
+            _globalSettings.LoadBackup();
         }
     }
 }

@@ -10,7 +10,7 @@ using System.Windows;
 
 namespace PasswordManager.Helper
 {
-    internal class KeysSettings : IKeysSettings
+    public class KeysSettings : IKeysSettings
     {
         public void SaveKeys(string keysFile)
         {

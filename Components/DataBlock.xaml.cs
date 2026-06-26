@@ -1,4 +1,5 @@
-﻿using PasswordManager.Helper;
+﻿using Microsoft.Extensions.DependencyInjection;
+using PasswordManager.Helper;
 using PasswordManager.Pages;
 using PasswordManager.Services;
 using System.Windows;
@@ -30,13 +31,16 @@ namespace PasswordManager.Components
 
         private void EditBlock_Click(object sender, RoutedEventArgs e)
         {
-            Modal_EditData modal_editData = new Modal_EditData(this, this.Title_Content.Content.ToString(), this.Login_Content.Content.ToString(), this.Password_Content.Text, this.Additional_Content.Text);
+            var createModal = App.Services.GetRequiredService<Func<DataBlock, string, string, string, string, Modal_EditData>>();
+            Modal_EditData modal_editData = createModal(this, this.Title_Content.Content.ToString(), this.Login_Content.Content.ToString(), this.Password_Content.Text, this.Additional_Content.Text);
             ModalService.ShowModal(modal_editData);
         }
 
         private void DeleteBlock_Click(object sender, RoutedEventArgs e)
         {
-            DeleteDialog deleteDialog = new DeleteDialog(this);
+            var createDialog = App.Services.GetRequiredService<Func<DataBlock, DeleteDialog>>();
+            var deleteDialog = createDialog(this);
+
             ModalService.ShowModal(deleteDialog);
         }
 

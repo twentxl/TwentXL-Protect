@@ -15,7 +15,7 @@ using System.Windows.Media;
 
 namespace PasswordManager.Helper
 {
-    internal class GlobalSettings : ASettings, IGlobalSettings
+    public class GlobalSettings : ASettings, IGlobalSettings
     {
         public static SettingsModel settingsModel = new SettingsModel();
         public static bool isAuth = false;
@@ -25,6 +25,8 @@ namespace PasswordManager.Helper
         public GlobalSettings(IBackupSettings backupSettings)
         {
             _backupSettings = backupSettings;
+
+            settingsModel = new SettingsModel();
         }
 
         public void LoadSettings()
@@ -43,7 +45,7 @@ namespace PasswordManager.Helper
             string json = File.ReadAllText(filePathSettings);
             if(json != null)
             {
-                SettingsModel settingsList = JsonSerializer.Deserialize<SettingsModel>(json);
+                SettingsModel? settingsList = JsonSerializer.Deserialize<SettingsModel>(json);
                 if(settingsList != null)
                 {
                     settingsModel.DarkTheme = settingsList.DarkTheme;

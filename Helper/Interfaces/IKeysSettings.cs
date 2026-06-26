@@ -9,7 +9,7 @@ using System.Windows;
 
 namespace PasswordManager.Helper.Interfaces
 {
-    internal interface IKeysSettings
+    public interface IKeysSettings
     {
         public void SaveKeys(string keysFile);
         public void LoadKeys(string keysFile);

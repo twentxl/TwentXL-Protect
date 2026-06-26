@@ -3,7 +3,7 @@ using System.Security.Cryptography;
 
 namespace PasswordManager.Helper
 {
-    internal class Crypto
+    public class Crypto
     {
         public static byte[] key;
         public static byte[] iv;

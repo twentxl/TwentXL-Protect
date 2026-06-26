@@ -14,15 +14,20 @@ using System.Security.Cryptography;
 using System.Windows.Shapes;
 using PasswordManager.Helper.Interfaces;
 using System.Diagnostics;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace PasswordManager
 {
     public partial class AuthenticationWindow : Window
     {
-        public AuthenticationWindow()
+        private IDataSettings _dataSettings; 
+
+        public AuthenticationWindow(IDataSettings dataSettings)
         {
             InitializeComponent();
             ErrorMessage.Visibility = Visibility.Collapsed;
+
+            _dataSettings = dataSettings;
         }
 
         private void Titlebar_MouseDown(object sender, MouseButtonEventArgs e)
@@ -44,7 +49,7 @@ namespace PasswordManager
 
                 using (Aes aes = Aes.Create())
                 {
-                    App.dataSettings?.LoadKeys();
+                    _dataSettings.LoadKeys();
                     aes.Key = Crypto.key;
                     aes.IV = Crypto.iv;
 
@@ -52,8 +57,8 @@ namespace PasswordManager
 
                     if (Code.Text == codeDecrypt)
                     {
-                        MainWindow mainWindow = new MainWindow();
-                        mainWindow.Show();
+                        var mainWindow = App.Services?.GetRequiredService<MainWindow>();
+                        mainWindow?.Show();
                         this.Close();
                     }
                     else
@@ -76,7 +81,7 @@ namespace PasswordManager
             if(message == MessageBoxResult.Yes)
             {
                 File.Delete(ASettings.public_filePathAuth);
-                App.dataSettings?.DestroyAll();
+                _dataSettings.DestroyAll();
                 this.Close();
             }
         }
