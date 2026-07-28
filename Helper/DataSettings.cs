@@ -26,25 +26,17 @@ namespace PasswordManager.Helper
             _keysSettings = keysSettings;
         }
 
-        public void LoadJson()
-        {
-            _jsonSettings.LoadJson(filePath);
-        }
+        public void LoadJson() 
+            => _jsonSettings.LoadJson(filePath);
 
         public void SaveJson()
-        {
-            _jsonSettings.SaveJson(filePath);
-        }
+            => _jsonSettings.SaveJson(filePath);
 
         public void SaveKeys()
-        {
-            _keysSettings.SaveKeys(keysFile);
-        }
+            => _keysSettings.SaveKeys(keysFile);
 
-        public void LoadKeys()
-        {
-            _keysSettings.LoadKeys(keysFile);
-        }
+        public void LoadKeys() 
+            => _keysSettings.LoadKeys(keysFile);
 
         public void DestroyAll()
         {

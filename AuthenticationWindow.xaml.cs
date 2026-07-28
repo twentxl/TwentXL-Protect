@@ -36,10 +36,8 @@ namespace PasswordManager
                 this.DragMove();
         }
 
-        private void Close_Click(object sender, RoutedEventArgs e)
-        {
-            this.Close();
-        }
+        private void Close_Click(object sender, RoutedEventArgs e) 
+            => this.Close();
 
         private void Confirm_Click(object sender, RoutedEventArgs e)
         {

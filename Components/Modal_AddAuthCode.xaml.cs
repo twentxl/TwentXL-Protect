@@ -30,10 +30,8 @@ namespace PasswordManager.Components
             _globalSettings = globalSettings;
         }
 
-        private void Cancel_Click(object sender, RoutedEventArgs e)
-        {
-            ModalService.HideModal();
-        }
+        private void Cancel_Click(object sender, RoutedEventArgs e) 
+            => ModalService.HideModal();
 
         private void Add_Click(object sender, RoutedEventArgs e)
         {

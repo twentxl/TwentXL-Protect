@@ -19,10 +19,8 @@ namespace PasswordManager.Helper
     {
         private IKeysSettings _keysSettings;
 
-        public JsonSettings(IKeysSettings keysSettings)
-        {
-            _keysSettings = keysSettings;
-        }
+        public JsonSettings(IKeysSettings keysSettings) 
+            => _keysSettings = keysSettings;
 
         public void LoadJson(string filePath)
         {

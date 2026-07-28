@@ -20,10 +20,8 @@ namespace PasswordManager.Helper
     {
         private IDataSettings _dataSettings;
 
-        public BackupSettings(IDataSettings dataSettings)
-        {
-            _dataSettings = dataSettings;
-        }
+        public BackupSettings(IDataSettings dataSettings) 
+            => _dataSettings = dataSettings;
 
         public void CreateBackup(SettingsModel settingsModel)
         {

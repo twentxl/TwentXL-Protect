@@ -21,10 +21,9 @@ namespace PasswordManager.Components
             _dataSettings = dataSettings;
         }
 
-        private void Cancel_Click(object sender, RoutedEventArgs e)
-        {
-            ModalService.HideModal();
-        }
+        private void Cancel_Click(object sender, RoutedEventArgs e) 
+            => ModalService.HideModal();
+
         private void GeneratePassword_Click(object sender, RoutedEventArgs e)
         {
             string res = Utils.GenerateRandomText(8, 21);

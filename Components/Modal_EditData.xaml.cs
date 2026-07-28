@@ -34,10 +34,8 @@ namespace PasswordManager.Components
             Password.Text = res.ToString();
         }
 
-        private void Cancel_Click(object sender, RoutedEventArgs e)
-        {
-            ModalService.HideModal();
-        }
+        private void Cancel_Click(object sender, RoutedEventArgs e) 
+            => ModalService.HideModal();
 
         private void Confirm_Click(object sender, RoutedEventArgs e)
         {

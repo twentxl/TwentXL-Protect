@@ -34,10 +34,9 @@ namespace PasswordManager.Helper
                 dialog.ShowNewFolderButton = true;
 
                 if (dialog.ShowDialog() == DialogResult.OK)
-                {
                     return dialog.SelectedPath;
-                }
             }
+
             return null;
         }
 
@@ -50,8 +49,11 @@ namespace PasswordManager.Helper
             };
 
             bool? result = dialog.ShowDialog();
-            if (result == true) return dialog.FileName;
-            else return null;
+
+            if (result == true) 
+                return dialog.FileName;
+            else 
+                return null;
         }
 
         public static void PasswordsListCheck()

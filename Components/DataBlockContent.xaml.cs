@@ -40,14 +40,14 @@ namespace PasswordManager.Components
 
         private void Actions_Click(object sender, RoutedEventArgs e)
         {
-            Button button = sender as Button;
+            Button? button = sender as Button;
             button.ContextMenu.PlacementTarget = button;
             button.ContextMenu.IsOpen = true;
         }
 
         private void CopyText_Click(object sender, RoutedEventArgs e)
         {
-            Button button = sender as Button;
+            Button? button = sender as Button;
             byte number = Byte.Parse(button?.Tag.ToString());
             switch (number)
             {

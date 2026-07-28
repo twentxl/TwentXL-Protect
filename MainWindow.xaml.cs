@@ -44,20 +44,14 @@ namespace PasswordManager
             base.OnClosed(e);
         }
 
-        private void MainPageShow()
-        {
-            AddPage(mainPage, "Home");
-        }
+        private void MainPageShow() 
+            => AddPage(mainPage, "Home");
 
-        private void SettingsPageShow()
-        {
-            AddPage(settingsPage, "Settings");
-        }
+        private void SettingsPageShow() 
+            => AddPage(settingsPage, "Settings");
 
-        private void FAQPageShow()
-        {
-            AddPage(faqpage, "FAQ");
-        }
+        private void FAQPageShow() 
+            => AddPage(faqpage, "FAQ");
 
         private void AddPage(UIElement element, string pageName)
         {
@@ -72,15 +66,11 @@ namespace PasswordManager
                 this.DragMove();
         }
 
-        private void ButtonClose_Click(object sender, RoutedEventArgs e)
-        {
-            this.Close();
-        }
+        private void ButtonClose_Click(object sender, RoutedEventArgs e) 
+            => this.Close();
 
-        private void ButtonMinimize_Click(object sender, RoutedEventArgs e)
-        {
-            this.WindowState = WindowState.Minimized;
-        }
+        private void ButtonMinimize_Click(object sender, RoutedEventArgs e) 
+            => this.WindowState = WindowState.Minimized;
 
         private void ButtonMaximize_Click(object sender, RoutedEventArgs e)
         {
@@ -97,29 +87,19 @@ namespace PasswordManager
             button.ContextMenu.IsOpen = true;
         }
 
-        private void Home_Click(object sender, RoutedEventArgs e)
-        {
-            MainPageShow();
-        }
+        private void Home_Click(object sender, RoutedEventArgs e) 
+            => MainPageShow();
 
-        private void Settings_Click(object sender, RoutedEventArgs e)
-        {
-            SettingsPageShow();
-        }
+        private void Settings_Click(object sender, RoutedEventArgs e) 
+            => SettingsPageShow();
 
-        private void FAQ_Click(object sender, RoutedEventArgs e)
-        {
-            FAQPageShow();
-        }
+        private void FAQ_Click(object sender, RoutedEventArgs e) 
+            => FAQPageShow();
 
-        private void CreateBackup_Click(object sender, RoutedEventArgs e)
-        {
-            _globalSettings.CreateBackup();
-        }
+        private void CreateBackup_Click(object sender, RoutedEventArgs e) 
+            => _globalSettings.CreateBackup();
 
-        private void LoadBackup_Click(object sender, RoutedEventArgs e)
-        {
-            _globalSettings.LoadBackup();
-        }
+        private void LoadBackup_Click(object sender, RoutedEventArgs e) 
+            => _globalSettings.LoadBackup();
     }
 }

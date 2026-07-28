@@ -70,15 +70,11 @@ namespace PasswordManager.Helper
             }
         }
 
-        public void CreateBackup()
-        {
-            _backupSettings.CreateBackup(settingsModel);
-        }
+        public void CreateBackup() 
+            => _backupSettings.CreateBackup(settingsModel);
 
-        public void LoadBackup()
-        {
-            _backupSettings.LoadBackup();
-        }
+        public void LoadBackup() 
+            => _backupSettings.LoadBackup();
 
         public void ApplyTheme(bool isDark)
         {

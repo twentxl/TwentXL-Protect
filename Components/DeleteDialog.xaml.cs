@@ -32,10 +32,8 @@ namespace PasswordManager.Components
             _dataSettings = dataSettings;
         }
 
-        private void Cancel_Click(object sender, RoutedEventArgs e)
-        {
-            ModalService.HideModal();
-        }
+        private void Cancel_Click(object sender, RoutedEventArgs e) 
+            => ModalService.HideModal();
 
         private void Delete_Click(object sender, RoutedEventArgs e)
         {

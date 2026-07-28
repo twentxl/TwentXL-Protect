@@ -20,6 +20,7 @@ namespace PasswordManager.Helper
             };
 
             string json = JsonSerializer.Serialize(keysList);
+
             File.WriteAllText(keysFile, json);
             File.SetAttributes(keysFile, File.GetAttributes(keysFile) | FileAttributes.Hidden);
         }
@@ -28,7 +29,8 @@ namespace PasswordManager.Helper
         {
             try
             {
-                string keysJson = File.ReadAllText(keysFile);
+               string keysJson = File.ReadAllText(keysFile);
+
                if(!string.IsNullOrWhiteSpace(keysJson) || !string.IsNullOrEmpty(keysJson))
                 {
                     List<byte[]> keysList = JsonSerializer.Deserialize<List<byte[]>>(keysJson);
