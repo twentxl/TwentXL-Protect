@@ -10,9 +10,10 @@
     <SolidColorBrush x:Key="TextColor" Color="#F9FAFB" />
     <SolidColorBrush x:Key="TextColorSecondary" Color="#D1D5DB" />
     <SolidColorBrush x:Key="TextColorAdditional" Color="#9CA3AF" />
-    <SolidColorBrush x:Key="SearchBlockColor" Color="#272B3A" />
+    <SolidColorBrush x:Key="BorderColor" Color="#272B3A" />
     <SolidColorBrush x:Key="TextBoxPlaceholder" Color="#6B7280" />
     <SolidColorBrush x:Key="DataBlockHover" Color="#333333" />
+    <SolidColorBrush x:Key="DataBlockColor" Color="#202029" />
     <sys:Double x:Key="FontSize">14</sys:Double>
     
     <Style x:Key="Title_Close" TargetType="Image">
@@ -34,7 +35,7 @@
     <Style x:Key="LeftBarSeparator" TargetType="Border">
         <Setter Property="IsHitTestVisible" Value="False"/>
         <Setter Property="Width" Value="1"/>
-        <Setter Property="Background" Value="{StaticResource SearchBlockColor}"/>
+        <Setter Property="Background" Value="{StaticResource BorderColor}"/>
         <Setter Property="SnapsToDevicePixels" Value="True"/>
     </Style>
 
@@ -337,23 +338,24 @@
 
     <!--DataBlock-->
     <Style x:Key="DataBlock_Block" TargetType="Button">
-        <Setter Property="Background" Value="{StaticResource WindowBackground}" />
+        <Setter Property="Background" Value="{StaticResource DataBlockColor}" />
         <Setter Property="Cursor" Value="Hand" />
         <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="Padding" Value="10,6" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
                     <Border x:Name="border"
-                        Background="{TemplateBinding Background}"
-                        CornerRadius="0">
+                     Background="{TemplateBinding Background}"
+                     CornerRadius="8">
                         <ContentPresenter HorizontalAlignment="Left"
-                                      VerticalAlignment="Center"/>
+                                   VerticalAlignment="Center"/>
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
                             <Setter TargetName="border"
-                                Property="Background"
-                                Value="{StaticResource DataBlockHover}"/>
+                             Property="Background"
+                             Value="{StaticResource DataBlockHover}"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -362,9 +364,11 @@
     </Style>
     <Style x:Key="DataBlock_Text" TargetType="TextBox">
         <Setter Property="IsReadOnly" Value="True" />
-        <Setter Property="Background" Value="Transparent" />
-        <Setter Property="Foreground" Value="{StaticResource TextColorSecondary}" />
-        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="Background" Value="{StaticResource DataBlockColor}" />
+        <Setter Property="Foreground" Value="{StaticResource TextColor}" />
+        <Setter Property="Padding" Value="10" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="BorderBrush" Value="{StaticResource BorderColor}" />
         <Setter Property="FontSize" Value="14" />
         <Setter Property="VerticalAlignment" Value="Center" />
     </Style>

@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:svgc="http://sharpvectors.codeplex.com/svgc/" 
              xmlns:local="clr-namespace:PasswordManager.Components"
-             mc:Ignorable="d" d:DesignWidth="800" Height="70" Cursor="">
+             mc:Ignorable="d" d:DesignWidth="800" Height="50" Margin="0,0,0,10">
     <Button Style="{DynamicResource DataBlock_Block}" Click="DataBlock_Click">
         <Button.ContextMenu>
             <ContextMenu>
@@ -22,30 +22,16 @@
             </ContextMenu>
         </Button.ContextMenu>
 
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="70" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
+        <StackPanel Orientation="Horizontal">
+            <TextBlock VerticalAlignment="Center">
+                <Label x:Name="Title_Content" Content="undefined"/>
+                <Label x:Name="Login_Content" Content="undefined" Foreground="{DynamicResource TextColorSecondary}"/>
+            </TextBlock>
 
-            <Border Background="{DynamicResource MainColor}" BorderThickness="3" CornerRadius="6" SnapsToDevicePixels="True">
-                <TextBlock x:Name="InitialsTitle" Text="Un" Foreground="White" FontSize="20" FontWeight="SemiBold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-            </Border>
-
-            <Grid Grid.Column="1">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="35" />
-                    <RowDefinition Height="Auto" />
-                </Grid.RowDefinitions>
-
-                <Label Grid.Row="0" x:Name="Title_Content" Content="Undefined" Style="{DynamicResource H1}" />
-                <Label Grid.Row="1" x:Name="Login_Content" Content="Undefined" />
-
-                <!--Hidding-->
-                <TextBox x:Name="Password_Content" Text="Undefined" Style="{DynamicResource DataBlock_Text}" Visibility="Hidden" />
-                <TextBox x:Name="Additional_Content" Text="Undefined" Style="{DynamicResource DataBlock_Text}" Visibility="Hidden" />
-                <TextBox x:Name="CreatedDate_Content" Text="01.01.1979" Style="{DynamicResource DataBlock_Text}" Visibility="Hidden" />
-            </Grid>
-        </Grid>
+            <!-- Hidden -->
+            <TextBox x:Name="Password_Content" Text="Undefined" Style="{DynamicResource DataBlock_Text}" Visibility="Hidden" />
+            <TextBox x:Name="Additional_Content" Text="Undefined" Style="{DynamicResource DataBlock_Text}" Visibility="Hidden" />
+            <TextBox x:Name="CreatedDate_Content" Text="01.01.1979" Style="{DynamicResource DataBlock_Text}" Visibility="Hidden" />
+        </StackPanel>
     </Button>
 </UserControl>

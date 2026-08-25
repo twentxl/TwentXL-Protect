@@ -3,17 +3,18 @@
                     xmlns:svgc="http://sharpvectors.codeplex.com/svgc/" 
                     xmlns:sys="clr-namespace:System;assembly=mscorlib">
     <SolidColorBrush x:Key="WindowBackground" Color="#FFFFFF"/>
-    <SolidColorBrush x:Key="WindowMenuColor" Color="#EEF2FF" />
-    <SolidColorBrush x:Key="LightHover" Color="#D7DFFF" />
+    <SolidColorBrush x:Key="WindowMenuColor" Color="#F0F2F6" />
+    <SolidColorBrush x:Key="LightHover" Color="#D4D7DC" />
     <SolidColorBrush x:Key="MainColor" Color="#141625" />
     <SolidColorBrush x:Key="MainColorHover" Color="#202338" />
     <SolidColorBrush x:Key="MainColorActive" Color="#1A1D32" />
     <SolidColorBrush x:Key="TextColor" Color="#1C1C1C" />
     <SolidColorBrush x:Key="TextColorSecondary" Color="#979AAD" />
     <SolidColorBrush x:Key="TextColorAdditional" Color="#6B728E" />
-    <SolidColorBrush x:Key="SearchBlockColor" Color="#EBECF3" />
+    <SolidColorBrush x:Key="BorderColor" Color="#CFD1D7" />
     <SolidColorBrush x:Key="TextBoxPlaceholder" Color="#757575" />
     <SolidColorBrush x:Key="DataBlockHover" Color="#EEEEEE" />
+    <SolidColorBrush x:Key="DataBlockColor" Color="#EEF0F4" />
     <sys:Double x:Key="FontSize">14</sys:Double>
     
     <Style x:Key="Title_Close" TargetType="Image">
@@ -35,7 +36,7 @@
     <Style x:Key="LeftBarSeparator" TargetType="Border">
         <Setter Property="IsHitTestVisible" Value="False"/>
         <Setter Property="Width" Value="1"/>
-        <Setter Property="Background" Value="{StaticResource SearchBlockColor}"/>
+        <Setter Property="Background" Value="{StaticResource BorderColor}"/>
         <Setter Property="SnapsToDevicePixels" Value="True"/>
     </Style>
 
@@ -176,7 +177,7 @@
         </Style.Triggers>
     </Style>
     <Style x:Key="Button_Header" TargetType="Button">
-        <Setter Property="Foreground" Value="{StaticResource TextColorAdditional}" />
+        <Setter Property="Foreground" Value="{StaticResource TextColor}" />
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="BorderBrush" Value="Transparent" />
         <Setter Property="Padding" Value="10" />
@@ -329,15 +330,16 @@
     
     <!--DataBlock-->
     <Style x:Key="DataBlock_Block" TargetType="Button">
-        <Setter Property="Background" Value="{StaticResource WindowBackground}" />
+        <Setter Property="Background" Value="{StaticResource DataBlockColor}" />
         <Setter Property="Cursor" Value="Hand" />
         <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="Padding" Value="10,6" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
                     <Border x:Name="border"
                         Background="{TemplateBinding Background}"
-                        CornerRadius="0">
+                        CornerRadius="8">
                         <ContentPresenter HorizontalAlignment="Left"
                                       VerticalAlignment="Center"/>
                     </Border>
@@ -354,9 +356,11 @@
     </Style>
     <Style x:Key="DataBlock_Text" TargetType="TextBox">
         <Setter Property="IsReadOnly" Value="True" />
-        <Setter Property="Background" Value="Transparent" />
-        <Setter Property="Foreground" Value="{StaticResource TextColorSecondary}" />
-        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="Background" Value="{StaticResource DataBlockColor}" />
+        <Setter Property="Foreground" Value="{StaticResource TextColor}" />
+        <Setter Property="Padding" Value="10" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="BorderBrush" Value="{StaticResource BorderColor}" />
         <Setter Property="FontSize" Value="14" />
         <Setter Property="VerticalAlignment" Value="Center" />
     </Style>

@@ -19,8 +19,6 @@ namespace PasswordManager.Components
             this.Password_Content.Text = password;
             this.Additional_Content.Text = additional;
             this.CreatedDate_Content.Text = createdDate;
-
-            this.InitialsTitle.Text = title.Substring(0, 2);
         }
 
         private void DataBlock_Click(object sender, RoutedEventArgs e)
@@ -49,7 +47,7 @@ namespace PasswordManager.Components
             MainPage.MainPageInstance?.DataBlockContentPanel.Children.Clear();
             MainPage.MainPageInstance?.DataBlockContentPanel.Children.Add(dataBlockContent);
 
-            MainPage.MainPageInstance?.SelectPassword_Message.Visibility = Visibility.Hidden;
+            MainPage.MainPageInstance.SelectPassword_Message.Visibility = Visibility.Hidden;
         }
     }
 }

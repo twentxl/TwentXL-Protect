@@ -30,7 +30,6 @@ namespace PasswordManager.Components
             this.Password_Content.Text = password;
             this.Additional_Content.Text = additional;
             this.CreatedDate_Content.Content = createdDate;
-            this.InitialsTitle.Text = title.Substring(0, 2);
 
             if (string.IsNullOrEmpty(title)) Title_Content.Visibility = Visibility.Collapsed;
             if (string.IsNullOrEmpty(login)) Login_Block.Visibility = Visibility.Collapsed;
